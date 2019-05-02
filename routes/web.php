@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -28,3 +26,18 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Khachhang
+Route::get('/khachhang/list', 'CustomerController@index');
+Route::get('/khachhang/create','CustomerController@create');
+Route::post('/khachhang/create','CustomerController@store');
+Route::get('/khachhang/remove/{id}', 'CustomerController@destroy');
+Route::get('/khachhang/details/{id}','CustomerController@details')->name('khachhang.details');
+Route::get('/khachhang/edit/{id}','CustomerController@edit')->name('khachhang.edit');
+Route::post('/khachhang/update/{id}','CustomerController@update');
+Route::get('/khachhang/accounts','CustomerController@getAccounts');
+
+//Order
+Route::get('/order/create/{customerId?}', 'OrderController@create');
+Route::get('/order/index','OrderController@index');
+Route::post('/order/create','OrderController@store');
