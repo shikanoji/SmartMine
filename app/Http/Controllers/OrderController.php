@@ -48,6 +48,7 @@ class OrderController extends Controller
         $feeCharge->chargeMoney = 0 - request('sotien');
         $feeCharge->ngay = request('ngay');
         $feeCharge->order_id = $order->id;
+        $feeCharge->note = "Đặt lệnh";
         $feeCharge->save(); 
 
         if (request('tratruoc') != 0) {
@@ -57,6 +58,7 @@ class OrderController extends Controller
             $charge->chargeMoney = request('tratruoc');
             $charge->order_id = $order->id;
             $charge->ngay = request('ngay');
+            $charge->note= "Thanh toán";
             $charge->save(); 
         }
         

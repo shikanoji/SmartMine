@@ -66,7 +66,9 @@
         body, h1, h2, h3, h4, h5, h6 {
             font-family: "Open Sans",sans-serif;
         }
-        
+        body {
+            overflow-x:hidden;
+        }
         @media only screen and (max-width: 300px) {
             body {
                 font-size: 4vw;
@@ -97,106 +99,104 @@
         }
         .select2 {
             width:100%!important;
-            min-height: calc(1.5em + .75rem + 2px);
-            max-height: calc(1.5em + .75rem + 2px);
         }
     </style>
     
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-sm navbar-fixed navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                   Quản trị
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                QTLĐ
+            </a>
+            
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown"> 
-                            <a class="nav-link dropdown-toggle" id="khdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khách hàng</a>
-                            <div class="dropdown-menu" aria-labelledby="khdropdown">
-                                <a class="dropdown-item" href="/khachhang/list">
-                                    Danh sách khách hàng
-                                </a>
-                                <a class="dropdown-item" href="/khachhang/create">
-                                    Thêm khách hàng mới
-                                </a>
-                                <a class="dropdown-item" href="/khachhang/accounts">
-                                    Quản lý nợ khách hàng
-                                </a>
-                             </div>
-
-                        </li>
-                        <li class="nav-item dropdown"> 
-                            <a class="nav-link dropdown-toggle" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đặt lệnh</a>
-                            <div class="dropdown-menu" aria-labelledby="lenhdropdown">
-                                <a class="dropdown-item" href="/order/index">
-                                    Lịch sử đặt lệnh
-                                </a>
-                                <a class="dropdown-item" href="/order/create">
-                                    Đặt lệnh mới
-                                </a>
-                             </div>
-                        </li>
-
-                        <li class="nav-item dropdown"> 
-                            <a class="nav-link dropdown-toggle" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
-                            <div class="dropdown-menu" aria-labelledby="tcdropdown">
-                                <a class="dropdown-item" href="">
-                                    Thanh toán
-                                </a>
-                                <a class="dropdown-item" href="">
-                                    Quản lý nợ
-                                </a>
-                             </div>
-
-                        </li>
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
-                            </li>
-                        @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                        @endif 
-                        @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" id="khdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khách hàng</a>
+                        <div class="dropdown-menu" aria-labelledby="khdropdown">
+                            <a class="dropdown-item" href="/khachhang/list">
+                                Danh sách khách hàng
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Đăng xuất') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                            <a class="dropdown-item" href="/khachhang/create">
+                                Thêm khách hàng mới
+                            </a>
+                            <a class="dropdown-item" href="/khachhang/accounts">
+                                Quản lý nợ khách hàng
+                            </a>
+                            </div>
 
+                    </li>
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đặt lệnh</a>
+                        <div class="dropdown-menu" aria-labelledby="lenhdropdown">
+                            <a class="dropdown-item" href="/order/index">
+                                Lịch sử đặt lệnh
+                            </a>
+                            <a class="dropdown-item" href="/order/create">
+                                Đặt lệnh mới
+                            </a>
+                            </div>
+                    </li>
+
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
+                        <div class="dropdown-menu" aria-labelledby="tcdropdown">
+                            <a class="dropdown-item" href="">
+                                Thanh toán
+                            </a>
+                            <a class="dropdown-item" href="">
+                                Quản lý nợ
+                            </a>
+                            </div>
+
+                    </li>
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
                         </li>
-                            
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                    @endif 
+                    @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Đăng xuất') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
 
-        <div class="container" style="margin-top: 20px;">
-            @yield('content')
+                    </li>
+                        
+                    @endguest
+                </ul>
+            </div>
         </div>
+    </nav>
+
+    <div class="container" style="margin-top: 70px;">
+        @yield('content')
     </div>
+
     @yield('script')
 </body>
 </html>

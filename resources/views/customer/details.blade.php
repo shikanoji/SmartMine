@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="portlet-background row" style="margin-top:10px;">
-        <div class="col-lg-12">
+        <div class="col-lg-12 border-bottom">
             <div class="row row-item">
                 <div class=" portlet-title gray-bg round-corner col-lg-12">
                     <label style="margin-left:0; margin-right:auto;">Lịch sử đặt lệnh</label>
@@ -90,6 +90,39 @@
             </div>
         </div>
     </div>
+    <div class="portlet-background row" style="margin-top:10px;">
+            <div class="col-lg-12">
+                <div class="row row-item">
+                    <div class=" portlet-title gray-bg round-corner col-lg-12">
+                        <label style="margin-left:0; margin-right:auto;">Lịch sử thanh toán</label>
+                    </div>
+                </div>
+                <div class="row row-item">
+                    <table class="table" id="chargesTable" style="width:100%;text-align:center;">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Ngày</th>
+                            <th scope="col">Thành tiền</th>
+                            <th scope="col">Ghi chú</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $count = 0; ?>
+                             @foreach ($customer->charges as $charge)
+                            <?php $count = $count + 1 ?>
+                                <tr>
+                                <th scope="row">{{$count}}</th>
+                                <th scope="row">{{$charge->ngay}}</th>
+                                <td scope="row">{{number_format($charge->chargeMoney,  0, ',', '.')}}</td> 
+                                <td scope="row">{{$charge->note}}</td>                         
+                                </tr>
+                            @endforeach                 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 @endsection
 @section('script')
     

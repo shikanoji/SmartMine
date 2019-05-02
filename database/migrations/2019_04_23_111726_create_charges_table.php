@@ -20,6 +20,7 @@ class CreateChargesTable extends Migration
             $table->bigInteger('chargeMoney');
             $table->bigInteger('order_id');
             $table->date('ngay');
+            $table->string('note');
         });
     }
 

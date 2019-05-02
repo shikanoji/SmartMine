@@ -18,10 +18,10 @@
                             <label>Thông tin khách hàng</label>
                         </div>
                         <div class="row-item">
-                            <input class="form-control" type="text" name="ten" value="{{$customer->customerName}}" required>
+                            <input class="form-control" type="text" placeholder="Nhập tên" name="ten" value="{{$customer->customerName}}" required>
                         </div>
                         <div class="row-item">
-                            <input class="form-control" type="text" name="sdt" value="{{$customer->sdt}}" required>
+                            <input class="form-control" type="text" placeholder="Nhập sđt" name="sdt" value="{{$customer->sdt}}" required>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">

@@ -6,41 +6,43 @@
         <li class="breadcrumb-item active" aria-current="page">Lịch sử đặt lệnh</li>
         </ol>
     </nav>
-    <div class="row justify-content-center" style ="margin-left: 5px; margin-right:5px;">
-        <table class="table" id="ordersTable" style="width:100%;text-align:center;">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Khách hàng</th>
-            <th scope="col">Loại</th>
-            <th scope="col">Mã</th>
-            <th scope="col">Số tiền</th>
-            <th scopre="col">Kết quả</th>
-          </tr>
-        </thead>
-        <tbody>
-            <?php $count = 0; ?>
-            @foreach ($orders as $order)
-              <?php $count = $count + 1 ?>
-                <tr>
-                  <th scope="row">{{$count}}</th>
-                  <td scope="row"><a href="/khachhang/details/{{$order->customer->id}}">{{$order->customer->customerName}}</a></td>
-                  <td scope="row">{{$order->getType()}}</td>
-                  <td scope="row">{{$order->code}}</td>
-                  <td scope="row" >{{number_format($order->sotien, 0, ',', '.')}}</td>     
-                  <td scope="row">{{$order->getKetQua()}}</td>
-                </tr>
-            @endforeach
-          </tbody>
-        <tfoot>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"><button type="button" class="btn btn-info" onclick="location.href='/order/create'">Thêm</button></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tfoot>
-      </table>
+    <div class="row">
+        <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+            <table class="table" id="ordersTable" style="text-align:center;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Khách hàng</th>
+                    <th scope="col">Loại</th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Số tiền</th>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Kết quả</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php $count = 0; ?>
+                    @foreach ($orders as $order)
+                      <?php $count = $count + 1 ?>
+                        <tr>
+                          <td scope="row"><a href="/khachhang/details/{{$order->customer->id}}">{{$order->customer->customerName}}</a></td>
+                          <td scope="row">{{$order->getType()}}</td>
+                          <td scope="row">{{$order->code}}</td>
+                          <td scope="row">{{number_format($order->sotien, 0, ',', '.')}}</td>  
+                          <td scope="row">{{$order->ngay}}</td>   
+                          <td scope="row">{{$order->getKetQua()}}</td>
+                        </tr>
+                    @endforeach
+                  </tbody>
+                <tfoot>
+                    <th scope="col"><button type="button" class="btn btn-info" onclick="location.href='/order/create'">Thêm</button></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tfoot>
+              </table>
+        </div>       
     </div>
 @endsection
 @section('script')
@@ -65,9 +67,6 @@
                 }
             },
             "paging": true,
-            "columnDefs": [
-              { "width": "10%", "targets": 0 }
-            ],
             "autoWidth": true,
           } );
       } );

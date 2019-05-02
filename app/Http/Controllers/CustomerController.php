@@ -33,7 +33,7 @@ class CustomerController extends Controller
     {
         $warning = "none";
         if (Customer::where('sdt',request('sdt'))->exists() ){
-            $warning = "Số điện thoại đã tồn tại";
+            $warning = "Số điện thoại bị trùng";
             return view("customer.create", compact("warning") );  
         } else {         
             $customer = new Customer();

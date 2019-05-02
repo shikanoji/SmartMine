@@ -10,42 +10,44 @@
     </ol>
 </nav>
 
-<div class="row row-item justify-content-center" style ="margin-left: 5px; margin-right:5px;">
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-12 col-sm-12 col-md-12">
     <table class="table" id="accountsTable" style="text-align:center;">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Tên</th>
-            <th scope="col">Sđt</th>
-            <th scope="col">Tài khoản</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php $count = 0; ?>
-          @foreach ($customers as $customer)
-            <?php $count = $count + 1 ?>
-              <tr>
-                <th scope="row">{{$count}}</th>
-                <td><a href="/khachhang/details/{{$customer->id}}">{{$customer->customerName}}</a></td>
-                <td>{{$customer->sdt}}</td>
-                <td>{{number_format($customer->getTaiKhoan(),0,',','.')}} </td>
-                <td> 
-                  <a href="/khachhang/edit/{{$customer->id}}">
-                      <span>
-                        <i class="fa fa-edit" style="padding-right:10px;"></i>
-                      </span>
-                  </a> 
-                  <a href="/order/create/{{$customer->id}}">
-                      <span>
-                        <i class="fa fa-plus"></i>
-                      </span>                                                                                  
-                </td>
-              </tr>
-          @endforeach
-          
-        </tbody>
-      </table>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Tên</th>
+          <th scope="col">Sđt</th>
+          <th scope="col">Tài khoản</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $count = 0; ?>
+        @foreach ($customers as $customer)
+          <?php $count = $count + 1 ?>
+            <tr>
+              <th scope="row">{{$count}}</th>
+              <td><a href="/khachhang/details/{{$customer->id}}">{{$customer->customerName}}</a></td>
+              <td>{{$customer->sdt}}</td>
+              <td>{{number_format($customer->getTaiKhoan(),0,',','.')}} </td>
+              <td> 
+                <a href="/khachhang/edit/{{$customer->id}}">
+                    <span>
+                      <i class="fa fa-edit" style="padding-right:10px;"></i>
+                    </span>
+                </a> 
+                <a href="/order/create/{{$customer->id}}">
+                    <span>
+                      <i class="fa fa-plus"></i>
+                    </span>                                                                                  
+              </td>
+            </tr>
+        @endforeach
+        
+      </tbody>
+    </table>
+  </div>   
 </div>   
 @endsection
 
@@ -70,10 +72,7 @@
                   "sLast":     "Cuối"
                 }
             },
-            "paging": true,
-            "columnDefs": [
-              { "width": "15%", "targets": 0 }
-            ],
+            "paging": true,           
             "autoWidth": true,
           } );
       } );
