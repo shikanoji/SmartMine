@@ -41,3 +41,7 @@ Route::get('/khachhang/accounts','CustomerController@getAccounts');
 Route::get('/order/create/{customerId?}', 'OrderController@create');
 Route::get('/order/index','OrderController@index');
 Route::post('/order/create','OrderController@store');
+
+//Charge
+Route::get('/charge/create/{customerId?}','ChargeController@create');
+Route::post('/charge/create','ChargeController@store');

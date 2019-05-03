@@ -30,17 +30,13 @@
               <th scope="row">{{$count}}</th>
               <td><a href="/khachhang/details/{{$customer->id}}">{{$customer->customerName}}</a></td>
               <td>{{$customer->sdt}}</td>
-              <td>{{number_format($customer->getTaiKhoan(),0,',','.')}} </td>
+              <td>{{number_format($customer->getAccount(),0,',','.')}} </td>
               <td> 
-                <a href="/khachhang/edit/{{$customer->id}}">
+                <a href="/charge/create/{{$customer->id}}">
                     <span>
-                      <i class="fa fa-edit" style="padding-right:10px;"></i>
+                      <i class="fa fa-credit-card" style="padding-right:10px;"></i>
                     </span>
-                </a> 
-                <a href="/order/create/{{$customer->id}}">
-                    <span>
-                      <i class="fa fa-plus"></i>
-                    </span>                                                                                  
+                </a>                                                                                 
               </td>
             </tr>
         @endforeach
@@ -52,31 +48,5 @@
 @endsection
 
 @section('script')
-  <script>
-      $(document).ready(function() {
-          $('#accountsTable').DataTable( {
-            "language": {        
-                "sProcessing":   "Đang xử lý...",
-                "sLengthMenu":   "Xem _MENU_ mục",
-                "sZeroRecords":  "Không có kết quả nào",
-                "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-                "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
-                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-                "sInfoPostFix":  "",
-                "sSearch":       "Tìm:",
-                "sUrl":          "",
-                "oPaginate": {
-                  "sFirst":    "Đầu",
-                  "sPrevious": "Trước",
-                  "sNext":     "Tiếp",
-                  "sLast":     "Cuối"
-                }
-            },
-            "paging": true,           
-            "autoWidth": true,
-          } );
-      } );
-  </script>
-
- @endsection     
+@endsection     
 

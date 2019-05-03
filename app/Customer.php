@@ -18,12 +18,23 @@ class Customer extends Model
         return $this->hasMany(charge::class);
     }
 
-    public function getTaiKhoan(){
+    public function getAccount(){
         $account = 0;
         $charges = $this->charges()->get();
         foreach ($charges as $charge) {           
             $account = $account + $charge->chargeMoney;
         }
         return $account;
+    }
+
+    public function getWinningTimes(){
+        $count = 0;
+        $orders = $this->orders()->get();
+        foreach($orders as $order){
+            if ($order->status == 'success') {
+                $count= $count + 1;
+            }
+        }
+        return $count;
     }
 }

@@ -69,12 +69,12 @@
         body {
             overflow-x:hidden;
         }
-        @media only screen and (max-width: 300px) {
+        @media only screen and (max-width: 500px) {
             body {
                 font-size: 4vw;
             }
-            th, td {
-                font-size: 2vw;  
+            .table {
+                font-size: 4vw;  
             }
         }
         .page-item.active .page-link {
@@ -147,13 +147,13 @@
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
                         <div class="dropdown-menu" aria-labelledby="tcdropdown">
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="/charge/create">
                                 Thanh toán
                             </a>
                             <a class="dropdown-item" href="">
-                                Quản lý nợ
+                                Tình hình tài chính
                             </a>
-                            </div>
+                        </div>
 
                     </li>
                 </ul>
@@ -197,6 +197,32 @@
         @yield('content')
     </div>
 
+    <script>
+            $(document).ready(function() {
+                $('.table').DataTable( {
+                  "language": {        
+                      "sProcessing":   "Đang xử lý...",
+                      "sLengthMenu":   "Xem _MENU_ mục",
+                      "sZeroRecords":  "Không có kết quả nào",
+                      "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                      "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+                      "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                      "sInfoPostFix":  "",
+                      "sSearch":       "Tìm:",
+                      "sUrl":          "",
+                      "oPaginate": {
+                        "sFirst":    "Đầu",
+                        "sPrevious": "Trước",
+                        "sNext":     "Tiếp",
+                        "sLast":     "Cuối"
+                      }
+                  },
+                  "paging": true,           
+                  "autoWidth": true,
+                  "info": false,
+                } );
+            } );
+        </script>
     @yield('script')
 </body>
 </html>

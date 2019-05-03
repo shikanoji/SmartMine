@@ -90,9 +90,5 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        function deleteCustomer(){
 
-        }
-    </script>
 @endsection
