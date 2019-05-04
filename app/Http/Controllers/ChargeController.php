@@ -25,9 +25,11 @@ class ChargeController extends Controller
         $charge = new charge();
         $charge->user_id  = auth()->id();
         $charge->customer_id = request('customer_id');
+        $charge->order_id = null;
         $charge->ngay = request('ngay');
         $charge->chargeMoney = request('chargeMoney');
-        $charge->note = "Thanh toán";
+        $charge->note = request('note');
         $charge->save();
+        return redirect('/charge/create');
     }
 }

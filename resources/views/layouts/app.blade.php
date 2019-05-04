@@ -70,11 +70,8 @@
             overflow-x:hidden;
         }
         @media only screen and (max-width: 500px) {
-            body {
+            body, .table {
                 font-size: 4vw;
-            }
-            .table {
-                font-size: 4vw;  
             }
         }
         .page-item.active .page-link {

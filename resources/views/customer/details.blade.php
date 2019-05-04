@@ -65,7 +65,6 @@
                         <table class="table" id="ordersTable" style="text-align:center;">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col"></th>
                                     <th scope="col">Ngày</th>
                                     <th scope="col">Mã</th>
                                     <th scope="col">Loại</th>
@@ -78,8 +77,7 @@
                                      @foreach ($customer->orders as $order)
                                     <?php $count = $count + 1 ?>
                                         <tr>
-                                        <th scope="row">{{$count}}</th>
-                                        <th scope="row">{{$order->ngay}}</th>
+                                        <th scope="row">{{ date('d/m/y', strtotime($order->ngay)) }}</th>
                                         <td scope="row">{{$order->code}}</td>
                                         <td scope="row">{{$order->getType()}}</td>
                                         <td scope="row">{{number_format($order->sotien,  0, ',', '.')}}</td>                          
@@ -104,7 +102,6 @@
                             <table class="table" id="chargesTable" style="text-align:center;">
                                     <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col"></th>
                                         <th scope="col">Ngày</th>
                                         <th scope="col">Thành tiền</th>
                                         <th scope="col">Ghi chú</th>
@@ -115,8 +112,7 @@
                                          @foreach ($customer->charges as $charge)
                                         <?php $count = $count + 1 ?>
                                             <tr>
-                                            <th scope="row">{{$count}}</th>
-                                            <th scope="row">{{$charge->ngay}}</th>
+                                            <th scope="row">{{ date('d/m/y', strtotime($charge->ngay)) }}</th>
                                             <td scope="row">{{number_format($charge->chargeMoney,  0, ',', '.')}}</td> 
                                             <td scope="row">{{$charge->note}}</td>                         
                                             </tr>

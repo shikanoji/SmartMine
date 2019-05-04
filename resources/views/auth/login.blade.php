@@ -18,10 +18,79 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+            .dashboard-stat {
+                   padding:20px;
+              }
+            .greentext {
+               color: #2ab4c0;
+              }
+            .redtext {
+               color: #f36a5a;
+              }
+            .bluetext, a {
+               color: #5C9BD1;
+              }
+             .purpletext {
+               color: #8877a9;
+              }
+              .whitetext {
+                  color: #fff,
+              }
+              .graytext {
+                  color: #6c757d,
+              }
+              .row-item {
+                  padding:10px;
+              }
+              .number {
+                  text-align: center;
+              }
+              .gray-bg {
+                  background-color: #e9ecef;
+              }
+              .border-bottom {
+                  border-bottom: 1px solid #e7ecf1;
+              }
+              body, h1, h2, h3, h4, h5, h6 {
+                  font-family: "Open Sans",sans-serif;
+              }
+              body {
+                  overflow-x:hidden;
+              }
+              @media only screen and (max-width: 500px) {
+                  body,div, .table {
+                      font-size: 4vw;
+                  }
+              }
+              .page-item.active .page-link {
+                  background-color: #5C9BD1;
+                  border-color: #5C9BD1;
+              }
+      
+              .portlet {
+                  margin-top:10px;
+              }
+              .round-corner {
+                  border-radius: 5px;
+              }
+              .portlet-title {
+                  min-height: 48px;
+                  padding:10px;
+                  border-bottom: 1px solid #e7ecf1;
+                  text-align: center;
+              }
+              .portlet-body {
+                  border-bottom: 1px solid #e7ecf1;
+              }
+              .select2 {
+                  width:100%!important;
+              }
+          </style>
 </head>
 <body>
     <div style="height: 80vh;">
-        <div class="container" style="margin-top:20vh;">
+        <div class="container" style="margin-top:20vh;margin-bottom:20vh;">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                 <div class="card">

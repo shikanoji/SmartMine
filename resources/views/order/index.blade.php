@@ -28,7 +28,7 @@
                           <td scope="row">{{$order->getType()}}</td>
                           <td scope="row">{{$order->code}}</td>
                           <td scope="row">{{number_format($order->sotien, 0, ',', '.')}}</td>  
-                          <td scope="row">{{$order->ngay}}</td>   
+                          <td scope="row">{{ date('d/m/y', strtotime($order->ngay)) }}</td>   
                           <td scope="row">{{$order->getKetQua()}}</td>
                         </tr>
                     @endforeach
