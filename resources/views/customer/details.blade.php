@@ -5,6 +5,7 @@
 @section('content')
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/khachhang/list">Khách hàng</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
             </ol>
@@ -20,7 +21,7 @@
     <div class="portlet-background row">
         <div class="col-md-6 portlet" style="padding-right:10px;">
             <div class="portlet-title gray-bg round-corner">
-                <label class="">Thông tin cá nhân</label>&nbsp&nbsp<span><a href="/khachhang/edit/{{$customer->id}}"><i class="fa fa-edit"></i></a></span>
+                <label style="margin-left:0; margin-right:auto;margin-top:5px;">Thông tin cá nhân</label>&nbsp&nbsp<span><a href="/khachhang/edit/{{$customer->id}}"><i class="fa fa-edit"></i></a></span>
             </div>         
             <div class="portlet-body">
                 <div class="row row-item">
@@ -35,7 +36,7 @@
         </div>
         <div class="col-md-6 portlet">
             <div class="portlet-title gray-bg round-corner">
-                <label class="">Thông số</label>
+                <label style="margin-left:0; margin-right:auto;margin-top:5px;">Thông số</label>
             </div> 
             <div class="portlet-body">
                 <div class="row row-item">
@@ -57,12 +58,12 @@
         <div class="col-12 col-lg-12 col-sm-12 col-md-12 border-bottom">
             <div class="row row-item">
                 <div class=" portlet-title gray-bg round-corner col-lg-12">
-                    <label style="margin-left:0; margin-right:auto;">Lịch sử đặt lệnh</label>
+                    <label style="margin-left:0; margin-right:auto;margin-top:5px;">Lịch sử đặt lệnh</label>
                 </div>
             </div>
             <div class="row row-item">
                 <div class="col-12 col-lg-12 col-sm-12 col-md-12">
-                        <table class="table" id="ordersTable" style="text-align:center;">
+                        <table class="table table-dt" id="ordersTable" style="text-align:center;">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Ngày</th>
@@ -78,7 +79,7 @@
                                     <?php $count = $count + 1 ?>
                                         <tr>
                                         <th scope="row">{{ date('d/m/y', strtotime($order->ngay)) }}</th>
-                                        <td scope="row">{{$order->code}}</td>
+                                        <td scope="row"><a href="/order/details/{{$order->id}}">{{$order->code}}</a></td>
                                         <td scope="row">{{$order->getType()}}</td>
                                         <td scope="row">{{number_format($order->sotien,  0, ',', '.')}}</td>                          
                                         <td scope="row">{{$order->getKetQua()}}</td>
@@ -94,15 +95,15 @@
             <div class="col-12 col-lg-12 col-sm-12 col-md-12">
                 <div class="row row-item">
                     <div class=" portlet-title gray-bg round-corner col-lg-12">
-                        <label style="margin-left:0; margin-right:auto;">Biến động tài khoản</label>
+                        <label style="margin-left:0; margin-right:auto;margin-top:5px;">Biến động tài khoản</label>
                     </div>
                 </div>
                 <div class="row row-item">
                     <div class="col-12 col-lg-12 col-sm-12 col-md-12">
-                            <table class="table" id="chargesTable" style="text-align:center;">
+                            <table class="table table-dt" id="chargesTable" style="text-align:center;">
                                     <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">Ngày</th>
+                                        <th scope="col">Ngày giờ</th>
                                         <th scope="col">Thành tiền</th>
                                         <th scope="col">Ghi chú</th>
                                     </tr>
@@ -112,7 +113,7 @@
                                          @foreach ($customer->charges as $charge)
                                         <?php $count = $count + 1 ?>
                                             <tr>
-                                            <th scope="row">{{ date('d/m/y', strtotime($charge->ngay)) }}</th>
+                                            <th scope="row">{{ date('d/m/y H:i:s', strtotime($charge->created_at)) }}</th>
                                             <td scope="row">{{number_format($charge->chargeMoney,  0, ',', '.')}}</td> 
                                             <td scope="row">{{$charge->note}}</td>                         
                                             </tr>

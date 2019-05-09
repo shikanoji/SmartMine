@@ -5,6 +5,7 @@
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/khachhang/list">Khách hàng</a></li>
             <li class="breadcrumb-item active" aria-current="page">Sửa thông tin</li>
         </ol>
@@ -80,7 +81,7 @@
                 </div>
                 <div class="row-item">
                     <button type="submit" class="btn btn-info">Cập nhật</button>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" style="display:none;">
                         <a onclick="return confirm('Xoá khách hàng ' + {{$customer->customerName}} + ' ?')" href="/khachhang/remove/{{$customer->id}}" style="color:white;">
                             Xoá khách hàng
                         </a> 

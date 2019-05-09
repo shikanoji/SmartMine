@@ -8,6 +8,10 @@ use App\charge;
 
 class ChargeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function create($customerId = null){
         $customers = Customer::where('user_id', auth()->id())
@@ -26,7 +30,8 @@ class ChargeController extends Controller
         $charge->user_id  = auth()->id();
         $charge->customer_id = request('customer_id');
         $charge->order_id = null;
-        $charge->ngay = request('ngay');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $charge->created_at = date('Y-m-d H:i:s');
         $charge->chargeMoney = request('chargeMoney');
         $charge->note = request('note');
         $charge->save();

@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('customer_id');
             $table->string('type');
             $table->date('ngay');
+            $table->datetime('created_at');
             $table->string('code');
             $table->bigInteger('sotien');
             $table->string('status');

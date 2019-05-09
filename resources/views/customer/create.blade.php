@@ -5,6 +5,7 @@
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/khachhang/list">Khách hàng</a></li>
             <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
         </ol>
@@ -15,7 +16,7 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
-                        <div class="row-item gray-bg round-corner">
+                        <div class="row-item gray-bg round-corner" style="text-align: center">
                             <label>Nhập thông tin khách hàng</label>
                         </div>
                         <div class="row-item" style="display:{{ $warning == 'none' ? "none" : "block" }}">
@@ -29,7 +30,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                        <div class="row-item justify-content-center gray-bg round-corner">
+                        <div class="row-item justify-content-center gray-bg round-corner" style="text-align: center">
                             <Label>Tỷ lệ ăn</Label>
                         </div>
                         <div class="row row-item">

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\order;
+use App\Customer;
+use App\charge;
 
 class HomeController extends Controller
 {
@@ -22,7 +25,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $customers = Customer::where('user_id', auth()->id())->get();
+        $orders =   order::where('user_id', auth()->id())->get();
+        $totalAccount  =  0;
+        foreach($customers as $customer) {
+            $totalAccount = $totalAccount + $customer->getAccount();
+        }  
+        return view('home', compact('customers','orders', 'totalAccount'));
     }
 }

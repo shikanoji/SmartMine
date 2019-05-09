@@ -19,7 +19,7 @@ class CreateChargesTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('chargeMoney');
             $table->bigInteger('order_id')->nullable();
-            $table->date('ngay');
+            $table->dateTime('created_at');
             $table->string('note');
         });
     }

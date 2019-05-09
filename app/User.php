@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'account', 'password',
     ];
 
     /**
@@ -34,35 +34,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'roles' => 'array',
+        'email_verified_at' => 'datetime'
     ];
 
-        /***
-     * @param string $role
-     * @return $this
-     */
-        
-    public function addRole(string $role)
-    {
-        $roles = $this->getRoles();
-        $roles[] = $role;
-        
-        $roles = array_unique($roles);
-        $this->setRoles($roles);
-
-        return $this;
-    }
-
-    /**
-     * @param array $roles
-     * @return $this
-     */
-    public function setRoles(array $roles)
-    {
-        $this->setAttribute('roles', $roles);
-        return $this;
-    }
 
     /***
      * @param $role
@@ -70,35 +44,21 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        return in_array($role, $this->getRoles());
+
+        return ($this->role == $role);
     }
 
-    /***
-     * @param $roles
-     * @return mixed
-     */
-    public function hasRoles($roles)
-    {
-        $currentRoles = $this->getRoles();
-        foreach($roles as $role) {
-            if ( ! in_array($role, $currentRoles )) {
-                return false;
-            }
+    public function getRole(){
+        switch($this->role) {
+            case 'ROLE_ADMIN': 
+                return 'Quản trị';
+                break;
+            case 'ROLE_MEMBER': 
+                return 'Nguời dùng thường';
+                break;
+            default:
+                return "Không rõ";
         }
-        return true;
     }
 
-    /**
-     * @return array
-     */
-    public function getRoles()
-    {
-        $roles = $this->getAttribute('roles');
-
-        if (is_null($roles)) {
-            $roles = [];
-        }
-
-        return $roles;
-    }
 }

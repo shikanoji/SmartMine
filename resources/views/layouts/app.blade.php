@@ -73,6 +73,12 @@
             body, .table {
                 font-size: 3vw;
             }
+            input, .btn, .badge {
+                font-size: 4vw;
+            }
+            h3 {
+                font-size: 7vw;
+            }
         }
         .page-item.active .page-link {
             background-color: #5C9BD1;
@@ -124,9 +130,9 @@
                                 Thêm khách hàng mới
                             </a>
                             <a class="dropdown-item" href="/khachhang/accounts">
-                                Quản lý nợ khách hàng
+                                Tài khoản khách hàng
                             </a>
-                            </div>
+                        </div>
 
                     </li>
                     <li class="nav-item dropdown"> 
@@ -138,7 +144,7 @@
                             <a class="dropdown-item" href="/order/create">
                                 Đặt lệnh mới
                             </a>
-                            </div>
+                        </div>
                     </li>
 
                     <li class="nav-item dropdown"> 
@@ -149,6 +155,19 @@
                             </a>
                             <a class="dropdown-item" href="">
                                 Tình hình tài chính
+                            </a>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" id="kqdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kết quả</a>
+                        <div class="dropdown-menu" aria-labelledby="kqdropdown">
+                            <a class="dropdown-item" href="/result/index">
+                                Xem kết quả
+                            </a>
+                            <a class="dropdown-item" href="/result/input" style="display:{{Auth::user()->hasRole('ROLE_ADMIN')? 'block' : 'none'}}">
+                                Nhập kết quả
                             </a>
                         </div>
 
@@ -172,7 +191,13 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/user/index" style="display:{{Auth::user()->hasRole('ROLE_ADMIN')? 'block' : 'none'}}">
+                                Danh sách người dùng
+                            </a>
+                            <a class="dropdown-item" href="/user/changePassword" >
+                                Đổi mật khẩu
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -190,13 +215,35 @@
         </div>
     </nav>
 
-    <div class="container" style="margin-top: 70px;">
+    <div class="container" style="margin-top: 70px;margin-bottom:150px;">
         @yield('content')
     </div>
-
+    <div class="footer fixed-bottom" style="height: 150px;width: 100%;background-color:#343a40;color:white;" >
+        <div class="container " >
+            <div class="row row-item justify-content-center">
+                <div class="col-5 col-md-4 col-lg-4" style="padding:10px;">
+                    <h7>Danh sách</h7>
+                    <ul class="list-group" style="list-style-type: none;">
+                        <li><a href="/result/index">Kết quả</a></li>
+                        <li><a href="/khachhang/list">Khách hàng</a></li>
+                        <li><a href="/order/index">Lệnh</a></li>
+                        <li><a href="/khachhang/accounts">Tài khoản</a></li>
+                    </ul>
+                </div>
+                <div class="col-5 col-md-4 col-lg-4" style="padding:10px;">
+                    <h7>Hoạt động</h7>
+                    <ul class="list-group" style="list-style-type: none;">
+                        <li><a href="/khachhang/create">Thêm khách hàng</a></li>
+                        <li><a href="/order/create">Tạo lệnh mới</a></li>
+                        <li><a href="/charge/create">Thanh toán</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
             $(document).ready(function() {
-                $('.table').DataTable( {
+                $('.table-dt').DataTable( {
                   "language": {        
                       "sProcessing":   "Đang xử lý...",
                       "sLengthMenu":   "Xem _MENU_ mục",

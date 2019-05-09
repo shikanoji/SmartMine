@@ -14,7 +14,7 @@ class OrderController extends Controller
     }
     public function index(){
         $orders = order::where('user_id', auth()->id())
-               ->orderBy('id', 'desc')
+               ->orderBy('created_at', 'desc')
                ->get();
         return view("order.index", compact("orders"));
     }
@@ -30,13 +30,19 @@ class OrderController extends Controller
             return view("order.create", compact("customers"));
         }      
     }
+    public function details($id){
+        $order = order::findOrFail($id);
+        return view("order.details", compact("order"));
+    }
 
     public function store(){
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $order = new order();
         $order->user_id  = auth()->id();
         $order->customer_id = request('customer_id');
         $order->type = request('type');
         $order->ngay = request('ngay');
+        $order->created_at = date('Y-m-d H:i:s');
         $order->code= request('code');
         $order->sotien = request('sotien');
         $order->status = "waiting";
@@ -46,7 +52,7 @@ class OrderController extends Controller
         $feeCharge->user_id = auth()->id();
         $feeCharge->customer_id = request('customer_id');
         $feeCharge->chargeMoney = 0 - request('sotien');
-        $feeCharge->ngay = request('ngay');
+        $feeCharge->created_at = date('Y-m-d H:i:s');
         $feeCharge->order_id = $order->id;
         $feeCharge->note = "Đặt lệnh";
         $feeCharge->save(); 
@@ -57,7 +63,7 @@ class OrderController extends Controller
             $charge->customer_id = request('customer_id');
             $charge->chargeMoney = request('tratruoc');
             $charge->order_id = $order->id;
-            $charge->ngay = request('ngay');
+            $charge->created_at = date('Y-m-d H:i:s');
             $charge->note= "Thanh toán";
             $charge->save(); 
         }

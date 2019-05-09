@@ -4,16 +4,20 @@
 @section('content')
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/khachhang/accounts">Tài khoản</a></li>
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/khachhang/accounts">Quản lý nợ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
             </ol>
     </nav>
     <form method="POST" action="/charge/create">
     {{csrf_field()}}
         <div class="row row-item justify-content-center">           
-            <div class="form-group col-lg-6 col-md-6 col-12">
+            <div class="form-group col-lg-6 col-md-8 col-12">  
                 <div class="row row-item">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-lg-3 col-sm-3 col-md-3 col-12">
+                        <label for="customerSelect">Khách</label> 
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-12">
                         <?php $customerNo = isset($customerId)? $customerId : 1 ; ?>
                         <select id="customerSelect" class="selectpicker form-control" name="customer_id" required>
                             @foreach($customers as $customer)
@@ -21,17 +25,7 @@
                             @endforeach
                         </select>
                     </div>            
-                </div>
-                <div class="row row-item">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                            <label for="ngay">Chọn ngày</label>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-12">
-                            <input id="ngay" class="form-control" type="date" name="ngay" data-date-format="mm/dd/yyyy">
-                        </div>               
-                </div>   
-            </div>
-            <div class="form-group col-lg-6 col-md-6 col-12">            
+                </div>           
                 <div class="row row-item">
                     <div class="col-lg-3 col-sm-3 col-md-3 col-12">
                         <label for="chargeMoney">Số tiền</label> 

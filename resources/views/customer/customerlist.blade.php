@@ -5,14 +5,14 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/home">Quản trị</a></li>
+      <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
       <li class="breadcrumb-item active" aria-current="page">Khách hàng</li>
     </ol>
 </nav>
 
 <div class="row justify-content-center">
     <div class="col-12 col-lg-12 col-sm-12 col-md-12">
-        <table class="table" id="customersTable" style="width:100%;text-align:center;">
+        <table class="table table-dt" id="customersTable" style="width:100%;text-align:center;">
             <thead class="thead-dark">
               <tr>
                 <th scope="col"></th>
@@ -45,18 +45,14 @@
               
             </tbody>
             <tfoot>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"><button type="button" class="btn btn-info" onclick="location.href='/khachhang/create'">Thêm</button></th>
+              <tr>
+                <td colspan="4"><button type="button" class="btn btn-info" onclick="location.href='/khachhang/create'">Thêm</button></td>
+              </tr>
             </tfoot>
           </table>
     </div>  
 </div>   
 
-<div class="row justify-content-center" style ="padding: 15px;">
-    
-</div>
 @endsection
 
 @section('script')
