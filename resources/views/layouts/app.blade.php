@@ -80,6 +80,7 @@
                 font-size: 7vw;
             }
         }
+        
         .page-item.active .page-link {
             background-color: #5C9BD1;
             border-color: #5C9BD1;
@@ -264,6 +265,8 @@
                   "paging": true,           
                   "autoWidth": true,
                   "info": false,
+                  "lengthChange": false,
+                  "pageLength": 10,
                 } );
             } );
         </script>

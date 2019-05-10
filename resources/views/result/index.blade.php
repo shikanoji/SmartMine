@@ -15,7 +15,7 @@
                         <input id="ngay" class="form-control" type="date" value={{ isset($deresult)? $deresult->ngay : (isset($ngay)? $ngay : date('Y-m-d'))}} name="ngay" data-date-format="dd/mm/yyyy">
                     </div>
                     <div class="col-5 col-sm-5 col-lg-5">
-                        <button class="btn btn-info" type="submit">Lấy kết quả</button>
+                        <button class="btn btn-info" type="submit">Xem kết quả</button>
                     </div>
                 </div>
             </form>
@@ -66,6 +66,6 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <button class="btn btn-info"><a style="color:white;" href="/result/updateScore">Cập nhật kết quả hôm nay</a></button>
+        <button class="btn btn-info"><a style="color:white;display:{{Auth::user()->hasRole('ROLE_ADMIN')? 'block' : 'none'}}" href="/result/updateScore">Cập nhật kết quả mới nhất</a></button>
     </div>
 @endsection

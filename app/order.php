@@ -43,9 +43,9 @@ class order extends Model
             case 'failed':
                 return "Trật";
             case 'success':
-                return "Ăn";
+                return "Ăn";    
             default:
-                return "Không rõ";
+                return "Ăn ".substr($this->status,7)." Nháy";
         }
     }
 
