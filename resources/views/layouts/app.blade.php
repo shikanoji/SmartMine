@@ -123,7 +123,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" id="khdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khách hàng</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="khdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khách hàng</a>
                         <div class="dropdown-menu" aria-labelledby="khdropdown">
                             <a class="dropdown-item" href="/khachhang/list">
                                 Danh sách khách hàng
@@ -138,7 +138,7 @@
 
                     </li>
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đặt lệnh</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đặt lệnh</a>
                         <div class="dropdown-menu" aria-labelledby="lenhdropdown">
                             <a class="dropdown-item" href="/order/index">
                                 Lịch sử đặt lệnh
@@ -150,7 +150,7 @@
                     </li>
 
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
                         <div class="dropdown-menu" aria-labelledby="tcdropdown">
                             <a class="dropdown-item" href="/charge/create">
                                 Thanh toán
@@ -163,7 +163,7 @@
                     </li>
 
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" id="kqdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kết quả</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="kqdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kết quả</a>
                         <div class="dropdown-menu" aria-labelledby="kqdropdown">
                             <a class="dropdown-item" href="/result/index">
                                 Xem kết quả
@@ -190,7 +190,7 @@
                     @endif 
                     @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
