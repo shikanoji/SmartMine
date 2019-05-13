@@ -80,6 +80,9 @@
             h3 {
                 font-size: 7vw;
             }
+            .footer {
+                display: none;
+            }
         }
         
         .page-item.active .page-link {
@@ -220,7 +223,7 @@
     <div class="container" style="margin-top: 70px;margin-bottom:150px;">
         @yield('content')
     </div>
-    
+    @include('footer')
     <script>
             $(document).ready(function() {
                 $('.table-dt').DataTable( {

@@ -30,4 +30,3 @@
     </form>
     
 @endsection
-@include('layouts.footer')

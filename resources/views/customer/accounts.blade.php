@@ -46,7 +46,5 @@
   </div>   
 </div>   
 @endsection
-@include('layouts.footer')
-@section('script')
-@endsection     
+
 
