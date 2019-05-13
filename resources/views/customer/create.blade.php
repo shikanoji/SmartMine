@@ -46,7 +46,7 @@
                                 <label>Lô</label>                        
                             </div>
                             <div class="col-sm-6 col-6">
-                                <input class="form-control" type="number" name="rateL" value="3.5" required>
+                                <input class="form-control" type="number" name="rateL" step=".1" value="3.5" required>
                             </div>                  
                         </div>
                         <div class="row row-item">
