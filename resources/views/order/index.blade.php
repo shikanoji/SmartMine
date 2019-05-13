@@ -42,5 +42,4 @@
         </div>       
     </div>
 @endsection
-@section('script')
-@endsection
+@include('layouts.footer')

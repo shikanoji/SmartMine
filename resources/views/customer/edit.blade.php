@@ -90,6 +90,4 @@
             </form>
     </div>
 @endsection
-@section('script')
-
-@endsection
+@include('layouts.footer')

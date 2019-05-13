@@ -69,3 +69,4 @@
         <button class="btn btn-info"><a style="color:white;display:{{Auth::user()->hasRole('ROLE_ADMIN')? 'block' : 'none'}}" href="/result/updateScore">Cập nhật kết quả mới nhất</a></button>
     </div>
 @endsection
+@include('layouts.footer')
