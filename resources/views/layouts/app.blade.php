@@ -223,7 +223,7 @@
     <div class="container" style="margin-top: 70px;margin-bottom:150px;">
         @yield('content')
     </div>
-    @include('footer')
+    @include('layouts.footer')
     <script>
             $(document).ready(function() {
                 $('.table-dt').DataTable( {
