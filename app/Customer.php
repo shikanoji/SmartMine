@@ -31,7 +31,7 @@ class Customer extends Model
         $count = 0;
         $orders = $this->orders()->get();
         foreach($orders as $order){
-            if ($order->status == 'success') {
+            if (substr($order->status, 0, 7) == 'success') {
                 $count= $count + 1;
             }
         }
