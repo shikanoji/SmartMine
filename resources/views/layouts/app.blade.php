@@ -108,6 +108,10 @@
         .select2 {
             width:100%!important;
         }
+        .select2-container .select2-selection--single {
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+        }
     </style>
     
 </head>
