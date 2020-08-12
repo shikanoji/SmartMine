@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Customer;
-use \App\order;
-use \App\charge;
+use \App\Order;
+use \App\Payment;
+use \App\User;
 class OrderController extends Controller
 {
     public function __construct()
@@ -13,16 +14,14 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        $orders = order::where('user_id', auth()->id())
-               ->orderBy('id', 'desc')
-               ->get();
-        return view("order.index", compact("orders"));
+        $orders = order::all();
+        $users = User::where('status','1')->get();
+        $customers = Customer::where('status','1')->get();
+        return view("order.index", compact("orders","customers","users"));
     }
     //
     public function create($customerId = null){
-        $customers = Customer::where('user_id', auth()->id())
-               ->orderBy('id', 'desc')
-               ->get();
+        $customers = Customer::all();
         if ( $customerId != null) {        
             return view("order.create", compact("customerId","customers"));
         }
@@ -35,39 +34,34 @@ class OrderController extends Controller
         return view("order.details", compact("order"));
     }
 
+    public function search(Request $request) {
+        $orders = Order::query()->userId($request)->customerId($request)->date($request)->productId($request)->get();
+        $users = User::where('status','1')->get();
+        $customers = Customer::where('status','1')->get();
+        return view("order.index", compact("orders","customers","users"));
+    }
+
     public function store(){
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $order = new order();
+        $order = new Order();
         $order->user_id  = auth()->id();
         $order->customer_id = request('customer_id');
-        $order->type = request('type');
-        $order->ngay = request('ngay');
-        $order->created_at = date('Y-m-d H:i:s');
-        $order->code= request('code');
-        $order->sotien = request('sotien');
-        $order->status = "waiting";
+        $order->product_id = request('product_id');
+        $order->date = date('Y-m-d');
+        $order->unit = request('unit');
+        $order->amount = request('amount');
+        $order->charge = str_replace(',','',request('charge'));
         $order->save();
 
-        $feeCharge = new charge();
-        $feeCharge->user_id = auth()->id();
-        $feeCharge->customer_id = request('customer_id');
-        $feeCharge->chargeMoney = 0 - request('sotien');
-        $feeCharge->created_at = date('Y-m-d H:i:s');
-        $feeCharge->order_id = $order->id;
-        $feeCharge->note = "Đặt lệnh";
-        $feeCharge->save(); 
-
-        if (request('tratruoc') != 0) {
-            $charge = new charge();
-            $charge->user_id = auth()->id();
-            $charge->customer_id = request('customer_id');
-            $charge->chargeMoney = request('tratruoc');
-            $charge->order_id = $order->id;
-            $charge->created_at = date('Y-m-d H:i:s');
-            $charge->note= "Thanh toán";
-            $charge->save(); 
-        }
+        $payment = new Payment();
+        $payment->user_id = auth()->id();
+        $payment->customer_id = request('customer_id');
+        $payment->amount = str_replace(',','',request('payment_amount'));
+        $payment->date = date('Y-m-d');
+        $payment->note = "Thanh toán lúc giao dịch";
+        $payment->save();
         
         return redirect('/order/index');
     }
+
 }

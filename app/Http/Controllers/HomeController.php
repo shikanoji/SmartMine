@@ -26,12 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $customers = Customer::where('user_id', auth()->id())->get();
-        $orders =   order::where('user_id', auth()->id())->get();
-        $totalAccount  =  0;
-        foreach($customers as $customer) {
-            $totalAccount = $totalAccount + $customer->getAccount();
-        }  
-        return view('home', compact('customers','orders', 'totalAccount'));
+         
+        return view('home');
     }
 }

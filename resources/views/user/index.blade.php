@@ -14,8 +14,9 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col">Tên</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
+                <th scope="col">Chức vụ</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Đổi mật khẩu</th>
               </tr>
             </thead>
             <tbody>
@@ -25,10 +26,11 @@
                   <tr>
                     <th scope="row">{{$count}}</th>
                     <td><a href="/user/details/{{$user->id}}">{{$user->name}}</a></td>
-                    <td>{{$user->email}}</td>
                     <td> 
                         {{$user->getRole()}}                                                                                 
                     </td>
+                    <td>@if ($user->status == "1") <span class="greentext">Đang hoạt động</span> @else <span class="redtext">Đang bị khoá</span> @endif</td>
+                    <td><span><a href="/user/changeUserPassword/{{$user->id}}"><i class="fa fa-edit"></i></a></span>&nbsp&nbsp</td>
                   </tr>
               @endforeach
               

@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Customer;
-class Order extends Model
+class Payment extends Model
 {
+    public $timestamps = false;
     //
-    protected $fillable = ['date','customer_id','user_id','type'];
-
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
@@ -26,15 +25,6 @@ class Order extends Model
     {
         if ($request->customer_id != '0') {
             $query->where('customer_id', $request->customer_id);
-        }
-
-        return $query;
-    }
-
-    public function scopeProductId($query, $request)
-    {
-        if ($request->product_id != '0') {
-            $query->where('product_id', $request->product_id);
         }
 
         return $query;

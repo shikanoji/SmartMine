@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'account', 'password',
+        'name', 'username', 'password',
     ];
 
     /**
@@ -44,7 +44,6 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-
         return ($this->role == $role);
     }
 
@@ -56,8 +55,34 @@ class User extends Authenticatable
             case 'ROLE_MEMBER': 
                 return 'Nguời dùng thường';
                 break;
+            case 'ROLE_SALER':
+                return 'Giao dịch viên';
+                break;
             default:
                 return "Không rõ";
+        }
+    }
+
+    public function hasAdminPermission() {
+        switch($this->role) {
+            case 'ROLE_ADMIN': 
+                return true;
+                break;
+            default:
+                return false;
+        }
+    }
+
+    public function hasSalerPermission(){
+        switch($this->role) {
+            case 'ROLE_ADMIN': 
+                return true;
+                break;
+            case 'ROLE_SALER':
+                return true;
+                break;
+            default:
+                return false;
         }
     }
 

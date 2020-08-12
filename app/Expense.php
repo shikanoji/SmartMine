@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ketqualo extends Model
+class Expense extends Model
 {
-    public $timestamps = false;
+    //
 }

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Quản lý công việc</title>
+    <title>Hệ thống quản lý mỏ</title>
 
 
     <!-- Fonts -->
@@ -29,6 +29,9 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <!-- ...or, you may also directly use a CDN :-->
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+ 
     @yield('css')
     <style>
       .dashboard-stat {
@@ -83,6 +86,9 @@
             .footer {
                 display: none;
             }
+            .form-control {
+                font-size: 0.7rem;
+            }
         }
         
         .page-item.active .page-link {
@@ -122,7 +128,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             <a class="navbar-brand" href="{{ url('/') }}">
-                QTLĐ
+                Smart Mine
             </a>
             
 
@@ -132,51 +138,48 @@
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" id="khdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khách hàng</a>
                         <div class="dropdown-menu" aria-labelledby="khdropdown">
-                            <a class="dropdown-item" href="/khachhang/list">
+                            <a class="dropdown-item" href="/customer/list">
                                 Danh sách khách hàng
                             </a>
-                            <a class="dropdown-item" href="/khachhang/create">
+                            <a class="dropdown-item" href="/customer/create">
                                 Thêm khách hàng mới
                             </a>
-                            <a class="dropdown-item" href="/khachhang/accounts">
-                                Tài khoản khách hàng
+                            <a class="dropdown-item" href="/customer/accounts">
+                                Dư nợ khách hàng
                             </a>
                         </div>
 
                     </li>
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" href="#" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đặt lệnh</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="lenhdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Giao dịch</a>
                         <div class="dropdown-menu" aria-labelledby="lenhdropdown">
                             <a class="dropdown-item" href="/order/index">
-                                Lịch sử đặt lệnh
+                                Lịch sử giao dịch
                             </a>
                             <a class="dropdown-item" href="/order/create">
-                                Đặt lệnh mới
+                                Giao dịch mới
                             </a>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" href="#" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài chính</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="tcdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thanh toán</a>
                         <div class="dropdown-menu" aria-labelledby="tcdropdown">
-                            <a class="dropdown-item" href="/charge/create">
-                                Thanh toán
+                            <a class="dropdown-item" href="/payment/index">
+                                Lịch sử thanh toán
                             </a>
-                            <a class="dropdown-item" href="">
-                                Tình hình tài chính
+                            <a class="dropdown-item" href="/payment/create">
+                                Thanh toán mới
                             </a>
                         </div>
 
                     </li>
 
                     <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" href="#" id="kqdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kết quả</a>
-                        <div class="dropdown-menu" aria-labelledby="kqdropdown">
-                            <a class="dropdown-item" href="/result/index">
-                                Xem kết quả
-                            </a>
-                            <a class="dropdown-item" href="/result/input" style="display:{{Auth::user()->hasRole('ROLE_ADMIN')? 'block' : 'none'}}">
-                                Nhập kết quả
+                        <a class="nav-link dropdown-toggle" href="#" id="product_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
+                        <div class="dropdown-menu" aria-labelledby="product_dropdown">
+                            <a class="dropdown-item" href="/product/index">
+                                Danh sách sản phẩm
                             </a>
                         </div>
 

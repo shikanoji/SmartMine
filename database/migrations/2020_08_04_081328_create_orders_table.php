@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChargesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateChargesTable extends Migration
      */
     public function up()
     {
-        Schema::create('charges', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('customer_id');
+            $table->bigInteger('product_id');
             $table->bigInteger('user_id');
-            $table->bigInteger('chargeMoney');
-            $table->bigInteger('order_id')->nullable();
-            $table->dateTime('created_at');
-            $table->string('note');
+            $table->string('unit');
+            $table->double('amount');
+            $table->bigInteger('charge');
+            $table->datetime('date');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +33,6 @@ class CreateChargesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charges');
+        Schema::dropIfExists('orders');
     }
 }

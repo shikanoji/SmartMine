@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Lịch sử giao dịch</li>
+        <li class="breadcrumb-item active" aria-current="page">Lịch sử thanh toán</li>
         </ol>
     </nav>
     <div class="row">
@@ -12,41 +12,37 @@
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">Khách hàng</th>
-                    <th scope="col">Loại</th>
-                    <th scope="col">Khối lượng</th>
-                    <th scope="col">Đơn vị</th>
-                    <th scope="col">Thành tiền</th>
-                    <th scope="col">Người phụ trách</th>
+                    <th scope="col">Số tiền</th>
+                    <th scope="col">Nhân viên phụ trách</th>
+                    <th scope="col">Ghi chú</th>
                     <th scope="col">Ngày</th>
                   </tr>
                 </thead>
                 <tbody>
-                    <?php $count = 0; $totalAmount = 0; $totalCharge = 0?>
-                    @foreach ($orders as $order)
-                      <?php $count = $count + 1 ; $totalAmount = $totalAmount + $order->amount; $totalCharge = $totalCharge +$order->charge ?>
+                    <?php $count = 0; $totalPayment = 0; ?>
+                    @foreach ($payments as $payment)
+                      <?php $count = $count + 1; $totalPayment = $totalPayment + $payment->amount ; ?>
                         <tr>
-                          <td scope="row"><a href="/customer/details/{{$order->customer->id}}">{{$order->customer->name}}</a></td>
-                          <td scope="row">@if (App\Product::where('id', $order->product_id)->get()->count() > 0)  <a href="/product/details/{{$order->product_id}}">{{App\Product::findOrFail($order->product_id)->name}}</a> @endif</td>
-                          <td scope="row">{{$order->amount}}</td>
-                          <td scope="row">{{$order->unit}}</td>
-                          <td scope="row"> <a href="/order/details/{{$order->id}}">{{number_format($order->charge, 0, ',', '.')}} </a></td>  
-                          <td scope="row"> @if (App\User::where('id', $order->user_id)->get()->count() > 0) {{App\User::findOrFail($order->user_id)->name}} @endif</td>
-                          <td scope="row">{{ date('d-m-Y', strtotime($order->date)) }}</td>   
+                          <td scope="row"><a href="/customer/details/{{$payment->customer->id}}">{{$payment->customer->name}}</a></td>
+                          <td scope="row">{{number_format($payment->amount,0,',','.')}}</td>
+                          <td scope="row"> @if (App\User::where('id', $payment->user_id)->get()->count() > 0) {{App\User::findOrFail($payment->user_id)->name}} @endif</td>
+                          <td scope="row">{{$payment->note}}</td>
+                          <td scope="row">{{ date('d-m-Y', strtotime($payment->date)) }}</td>   
                         </tr>
                     @endforeach
                   </tbody>
                 <tfoot>
                     <tr>
-                        <td><button type="button" class="btn btn-secondary" onclick="location.href='/order/create'">Thêm</button></td>
+                      <td ><button type="button" class="btn btn-secondary" onclick="location.href='/payment/create'">Thêm</button></td>
                     </tr>
                 </tfoot>
               </table>
         </div>       
     </div>
     <div class="row justify-content-center" style="padding:20px;">
-        <label><b>Tổng tiền: <span class="purpletext">{{number_format($totalCharge, 0, ',', '.')}} </span></b></label>
-    </div>    
-    <form method="POST" action="/order/search">
+        <label><b>Tổng tiền: <span class="purpletext">{{number_format($totalPayment, 0, ',', '.')}} </span></b></label>
+    </div>  
+    <form method="POST" action="/payment/search">
     {{csrf_field()}}
         <div class="row row-item justify-content-center">           
             <div class="form-group col-lg-6 col-md-6 col-12">
@@ -64,20 +60,6 @@
                     </div>            
                 </div>
                 <div class="row row-item">
-                    <div class="col-lg-4 col-sm-4 col-md-4 col-12">
-                        <label for="type">Mặt hàng</label> 
-                    </div>
-                    <div class="col-lg-8 col-sm-8 col-md-8 col-12">
-                         <?php $products = App\Product::all() ; ?>
-                        <select class="form-control selectpicker" name="product_id">
-                            <option value="0">Tất cả</option>
-                            @foreach($products as $product)
-                            <option value="{{$product->id}}">{{$product->name}} </option>
-                            @endforeach
-                        </select>
-                    </div>                 
-                </div>
-                <div class="row row-item">
                         <div class="col-lg-4 col-sm-4 col-md-4 col-12">
                         <label for="order-type">Người phụ trách</label> 
                     </div>
@@ -89,8 +71,7 @@
                             @endforeach
                         </select>
                     </div> 
-                  </div> 
-                  
+                  </div>    
             </div>  
             <div class="form-group col-lg-6 col-md-6 col-12">
                   <div class="row row-item">
@@ -98,29 +79,30 @@
                             <label for="from_date">Từ ngày</label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-12">
-                            <input id="from_date" class="form-control" value="{{request()->input("from_date")}}" type="date" name="from_date" data-date-format="dd-mm-yyyy">
+                            <input id="from_date" class="form-control" value="{{request()->input("from_date")}}" type="date" name="from_date" data-date-format="mm/dd/yyyy">
                         </div>               
                   </div> 
-                   <div class="row row-item">
+                  <div class="row row-item">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                             <label for="to_date">Đến ngày</label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-12">
-                            <input id="to_date" class="form-control" value="{{request()->input("to_date")}}"  type="date" name="to_date" data-date-format="dd-mm-yyyy">
+                            <input id="to_date" class="form-control" value="{{request()->input("to_date")}}" type="date" name="to_date" data-date-format="mm/dd/yyyy">
                         </div>               
-                  </div>  
+                  </div>
             </div>          
         </div>
         <div class="row row-item justify-content-center">
-            <button type="submit" class="btn btn-info">Lọc tìm giao dịch</button>
+            <button type="submit" class="btn btn-info">Lọc tìm thanh toán</button>
         </div>
     </form> 
 @endsection
-
 @section('script')
     <script>
         $(document).ready(function() {
-            $('select').select2({}); 
+            $('select').select2({
+            }
+            );            
         });
     </script>
 @endsection

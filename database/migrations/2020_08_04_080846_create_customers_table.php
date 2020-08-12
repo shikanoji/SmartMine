@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKetquadesTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateKetquadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ketquades', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('ngay');
-            $table->string('ketqua');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateKetquadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ketquades');
+        Schema::dropIfExists('customers');
     }
 }

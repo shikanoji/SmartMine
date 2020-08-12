@@ -33,30 +33,43 @@ Route::get('/user/create','UserController@create');
 Route::post('/user/store','UserController@store');
 Route::get('/user/changePassword','UserController@changePassword');
 Route::post('/user/updatePassword','UserController@updatePassword');
+Route::get('/user/details/{id}','UserController@details');
+Route::post('/user/lock/{id}', 'UserController@lock');
+Route::get('/user/changeUserPassword/{id}', 'UserController@changeUserPassword');
 
 //Khachhang
-Route::get('/khachhang/list', 'CustomerController@index');
-Route::get('/khachhang/create','CustomerController@create');
-Route::post('/khachhang/create','CustomerController@store');
-Route::get('/khachhang/remove/{id}', 'CustomerController@destroy');
-Route::get('/khachhang/details/{id}','CustomerController@details')->name('khachhang.details');
-Route::get('/khachhang/edit/{id}','CustomerController@edit')->name('khachhang.edit');
-Route::post('/khachhang/update/{id}','CustomerController@update');
-Route::get('/khachhang/accounts','CustomerController@getAccounts');
+Route::get('/customer/list', 'CustomerController@index');
+Route::get('/customer/create','CustomerController@create');
+Route::post('/customer/create','CustomerController@store');
+Route::get('/customer/remove/{id}', 'CustomerController@destroy');
+Route::get('/customer/details/{id}','CustomerController@details')->name('khachhang.details');
+Route::get('/customer/edit/{id}','CustomerController@edit')->name('khachhang.edit');
+Route::post('/customer/update/{id}','CustomerController@update');
+Route::get('/customer/accounts','CustomerController@getAccounts');
+Route::post('/customer/lock/{id}', 'CustomerController@lock');
 
 //Order
 Route::get('/order/create/{customerId?}', 'OrderController@create');
 Route::get('/order/index','OrderController@index');
 Route::post('/order/create','OrderController@store');
 Route::get('/order/details/{orderId}','OrderController@details');
+Route::post('/order/search','OrderController@search');
 
-//Charge
-Route::get('/charge/create/{customerId?}','ChargeController@create');
-Route::post('/charge/create','ChargeController@store');
+//Payment
+Route::get('/payment/create/{customerId?}','PaymentController@create');
+Route::post('/payment/store','PaymentController@store');
+Route::get('payment/index','PaymentController@index');
+Route::post('/payment/search','PaymentController@search');
 
-//Result
-Route::get('/result/index','ResultController@index');
-Route::post('/result/filter','ResultController@filter');
-Route::get('/result/updateScore','ResultController@getTodayScore');
-Route::get('/result/input','ResultController@inputScore');
-Route::post('/result/store','ResultController@store');
+//Product
+Route::get('/product/index', 'ProductController@index');
+Route::get('/product/create','ProductController@create');
+Route::post('/product/create','ProductController@store');
+Route::get('/product/remove/{id}', 'ProductController@destroy');
+Route::get('/product/details/{id}','ProductController@details');
+Route::get('/product/edit/{id}','ProductController@edit');
+Route::post('/product/update/{id}','ProductController@update');
+Route::post('/product/lock/{id}', 'ProductController@lock');
+
+//Firebase
+Route::get('firebase','FirebaseController@index');

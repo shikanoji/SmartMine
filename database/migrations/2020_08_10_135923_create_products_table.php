@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKetqualosTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateKetqualosTable extends Migration
      */
     public function up()
     {
-        Schema::create('ketqualos', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('ngay');
-            $table->string('ketqua');
+            $table->string('name');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateKetqualosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ketqualos');
+        Schema::dropIfExists('products');
     }
 }

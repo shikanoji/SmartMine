@@ -3,38 +3,48 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\order;
-use App\charge;
+use App\Order;
+use App\Payment;
+
 class Customer extends Model
 {
-    public $timestamps = false;
     //
-
     public function orders(){
-        return $this->hasMany(order::class);
+        return $this->hasMany(Order::class);
     }
 
-    public function charges(){
-        return $this->hasMany(charge::class);
+    public function payments(){
+        return $this->hasMany(Payment::class);
     }
 
-    public function getAccount(){
-        $account = 0;
-        $charges = $this->charges()->get();
-        foreach ($charges as $charge) {           
-            $account = $account + $charge->chargeMoney;
-        }
-        return $account;
-    }
-
-    public function getWinningTimes(){
-        $count = 0;
+    public function getBalance(){
+        $balance = 0;
         $orders = $this->orders()->get();
-        foreach($orders as $order){
-            if (substr($order->status, 0, 7) == 'success') {
-                $count= $count + 1;
-            }
+        foreach ($orders as $order) {           
+            $balance = $balance + $order->charge;
         }
-        return $count;
+        $payments = $this->payments()->get();
+        foreach ($payments as $payment) {
+            $balance = $balance - $payment->amount;
+        }
+        return $balance;
+    }
+
+    public function getTotalCharge() {
+        $total_charge = 0;
+        $orders = $this->orders()->get();
+        foreach ($orders as $order) {           
+            $total_charge = $total_charge + $order->charge;
+        }
+        return $total_charge;
+    }
+
+    public function getTotalPayment() {
+        $total_payment = 0;
+        $payments = $this->payments()->get();
+        foreach ($payments as $payment) {
+            $total_payment = $total_payment + $payment->amount;
+        }
+        return $total_payment;
     }
 }

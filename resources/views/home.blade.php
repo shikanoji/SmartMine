@@ -9,10 +9,10 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="">
-                            <span class="count" >{{$orders->where('status','waiting')->count()}}</span>
+                            <span class="count" >{{App\Order::where('date', date('Y-m-d'))->get()->count()}}</span>
                         </h3>
-                        <i class="fa fa-bullhorn"></i>&nbsp
-                        <small>Lệnh đang mở</small>
+                        <i class="fa fa-exchange"></i>&nbsp
+                        <small>Giao dịch trong ngày</small>
                     </div>
                 </div>
             </div>
@@ -22,10 +22,10 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="">
-                            <span class="count" >100</span> <span>%</span> 
+                            <span class="count" >100</span>  
                         </h3>
-                        <i class="fa fa-book"></i>&nbsp 
-                        <small>Cập nhật kết quả</small>
+                        <i class="fa fa-money"></i>&nbsp 
+                        <small>Giá trị giao dịch</small>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="">
-                            <span class="count">{{$customers->count()}}</span>
+                            <span class="count">3</span>
                         </h3>
                         <i class="fa fa-group"></i>&nbsp 
                         <small>Khách hàng</small>
@@ -48,10 +48,10 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="">
-                            <span class="count">{{-$totalAccount/1000}}</span> <span>K</span> 
+                            <span class="count">{{App\Payment::where('date', date('Y-m-d'))->get()->count()}}</span> 
                         </h3>
                         <i class="fa fa-bank"></i>&nbsp
-                        <small>Dư nợ khách hàng</small>
+                        <small>Doanh thu ngày</small>
                     </div>
                 </div>
             </div>

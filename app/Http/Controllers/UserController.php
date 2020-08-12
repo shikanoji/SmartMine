@@ -16,27 +16,40 @@ class UserController extends Controller
     }
 
     public function index(){
-        $users = User::all();
-        return view('user.index', compact('users'));
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $users = User::all();
+            return view('user.index', compact('users'));
+        } else {
+            abort(404);
+        }      
     }
 
     public function create(){
-        return view('user.create');
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            return view('user.create');
+        } else {
+            abort(404);
+        } 
     }
 
     public function store(){
-        if( User::where('email',request('email'))->exists()){
-            $warning = 'Email bị trùng lặp';
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            if( User::where('username',request('username'))->exists()){
+            $warning = 'Tên đăng nhập bị trùng lặp';
             return view('user.create',compact("warning"));
         } else {
             $user = new User();
             $user->name = request('name');
-            $user->email = request('email');
+            $user->username = request('username');
             $user->password = bcrypt(request('password'));
             $user->role = request('role');
+            $user->status = "1";
             $user->save();    
         }
         return $this->index();
+        } else {
+            abort(404);
+        } 
     }
 
     public function changePassword(){
@@ -56,5 +69,60 @@ class UserController extends Controller
 
         }
         return view('user.changePassword', compact('message'));
+    }
+
+    public function destroy($id) {
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect('/user/index');
+        } else {
+            error('404');
+        }      
+    }
+
+    public function lock($id) {
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $user = User::findOrFail($id);
+            if ($user->status == "1") {
+                $user->status = "0";
+            } else {
+                $user->status = "1";
+            }     
+            $user->save();
+            return redirect('/user/index');
+        } else {
+            error('404');
+        }
+    }
+
+    public function updateUserPassword() {
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $user = User::findOrFail(request('user_id'));
+            $user->password = bcrypt(request('newPassword'));
+            $user->save();
+            $message = "Đổi mật khẩu thành công";
+            return view('user.changeUserPassword', compact('message','user'));
+        } else {
+            abort(404);
+        }      
+    }
+
+    public function changeUserPassword($id) {
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $user = User::findOrFail($id);
+            return view('user.changeUserPassword', compact("user"));
+        } else {
+            abort(404);
+        }
+    }
+
+    public function details($id){
+        if (Auth::user()->hasRole('ROLE_ADMIN')) {
+            $user = User::findOrFail($id);
+            return view("user.details", compact("user"));
+        } else {
+            abort(404);
+        }    
     }
 }

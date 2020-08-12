@@ -26,7 +26,7 @@
                             <input class="form-control" type="text" name="name" placeholder="Nhập tên" required>
                         </div>
                         <div class="row-item">
-                            <input class="form-control" type="email" name="email" placeholder="Nhập email" required>
+                            <input class="form-control" type="text" name="username" placeholder="Nhập tên đăng nhập" required>
                         </div>
                         <div class="row-item">
                             <input class="form-control" type="password" name="password" placeholder="Nhập password" required>

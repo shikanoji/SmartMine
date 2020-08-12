@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use Auth;
 class CustomerController extends Controller
 {
     /**
@@ -17,9 +18,7 @@ class CustomerController extends Controller
     
     public function index()
     {
-        $customers = Customer::where('user_id', auth()->id())
-               ->orderBy('customerName', 'desc')
-               ->get();
+        $customers = Customer::all();
         return view("customer.customerlist", compact("customers"));
     }
 
@@ -32,36 +31,46 @@ class CustomerController extends Controller
     public function store()
     {
         $warning = "none";
-        if (Customer::where('sdt',request('sdt'))->exists() ){
+        if (Customer::where('phone',request('phone'))->exists() ){
             $warning = "Số điện thoại bị trùng";
             return view("customer.create", compact("warning") );  
         } else {         
             $customer = new Customer();
-            $customer->customerName = request('ten');
-            $customer->sdt = request('sdt');
-            $customer->user_id = auth()->id();
-            $customer->rateD = request('rateD');
-            $customer->rateL = request('rateL');
-            $customer->rateBC = request('rateBC');
-            $customer->rateLx2= request('rateLx2');
-            $customer->rateLx3 = request('rateLx3');
-            $customer->rateLx4 = request('rateLx4');
+            $customer->name = request('name');
+            $customer->phone = request('phone');
+            $customer->address = request('address');
+            $customer->status = "1";
             $customer->save();
-            return redirect('/khachhang/list');       
+            return redirect('/customer/list');       
         }
                
     }
 
+    public function lock($id) {
+        if (Auth::user()->hasSalerPermission()) {
+            $customer = Customer::findOrFail($id);
+            if ($customer->status == "1") {
+                $customer->status = "0";
+            } else {
+                $customer->status = "1";
+            }     
+            $customer->save();
+            return redirect('/customer/list');
+        } else {
+            error('404');
+        }
+    }
+
     public function getAccounts(){
-        $customers = Customer::where('user_id', auth()->id())
-               ->orderBy('customerName', 'desc')
-               ->get();
+        $customers = Customer::all();
         return view("customer.accounts", compact("customers"));
     }
 
     public function destroy($id){
-        Customer::findOrFail($id)->delete();
-        return redirect('/khachhang/list');
+        if (Auth::user()->hasAdminPermission()) {
+            Customer::findOrFail($id)->delete();
+            return redirect('/customer/list');
+        }        
     }
 
     public function details($id){
@@ -76,15 +85,10 @@ class CustomerController extends Controller
 
     public function update($id){
         $customer = Customer::findOrFail($id);
-        $customer->customerName = request('ten');
-        $customer->sdt = request('sdt');
-        $customer->rateD = request('rateD');
-        $customer->rateL = request('rateL');
-        $customer->rateBC = request('rateBC');
-        $customer->rateLx2= request('rateLx2');
-        $customer->rateLx3 = request('rateLx3');
-        $customer->rateLx4 = request('rateLx4');
+        $customer->name = request('name');
+        $customer->phone = request('phone');
+        $customer->address = request('address');
         $customer->save();
-        return \Redirect::route('khachhang.details', [$id]);
+        return redirect('/customer/list');
     }
 }

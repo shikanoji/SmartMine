@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Tài khoản khách hàng</li>
+      <li class="breadcrumb-item active" aria-current="page">Dư nợ khách hàng</li>
     </ol>
 </nav>
 
@@ -18,8 +18,8 @@
           <th scope="col"></th>
           <th scope="col">Tên</th>
           <th scope="col">Sđt</th>
-          <th scope="col">Tài khoản</th>
-          <th scope="col"></th>
+          <th scope="col">Dư nợ</th>
+          <th scope="col">Thanh toán</th>
         </tr>
       </thead>
       <tbody>
@@ -28,11 +28,11 @@
           <?php $count = $count + 1 ?>
             <tr>
               <th scope="row">{{$count}}</th>
-              <td><a href="/khachhang/details/{{$customer->id}}">{{$customer->customerName}}</a></td>
-              <td>{{$customer->sdt}}</td>
-              <td>{{number_format($customer->getAccount(),0,',','.')}} </td>
+              <td><a href="/customer/details/{{$customer->id}}">{{$customer->name}}</a></td>
+              <td>{{$customer->phone}}</td>
+              <td>{{number_format($customer->getBalance(),0,',','.')}} </td>
               <td> 
-                <a href="/charge/create/{{$customer->id}}">
+                <a href="/payment/create/{{$customer->id}}">
                     <span>
                       <i class="fa fa-credit-card" style="padding-right:10px;"></i>
                     </span>
