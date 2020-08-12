@@ -38,6 +38,7 @@
                             <div class="col-lg-8 col-sm-8 col-md-8 col-12">
                                 <select class="form-control selectpicker" name="role">
                                     <option value="ROLE_MEMBER">Người dùng thường</option>
+                                    <option value="ROLE_SALER">Nhân viên kinh doanh</option>
                                     <option value="ROLE_ADMIN">Quản trị viên</option>
                                 </select>
                             </div>                 

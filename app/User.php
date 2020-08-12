@@ -56,7 +56,7 @@ class User extends Authenticatable
                 return 'Nguời dùng thường';
                 break;
             case 'ROLE_SALER':
-                return 'Giao dịch viên';
+                return 'Nhân viên kinh doanh';
                 break;
             default:
                 return "Không rõ";

@@ -35,7 +35,8 @@
     @yield('css')
     <style>
       .dashboard-stat {
-             padding:20px;
+            padding:20px;
+            font-size: 1.5vh;
         }
       .greentext {
          color: #2ab4c0;
@@ -117,7 +118,7 @@
         .select2-container .select2-selection--single {
             height: calc(1.5em + .75rem + 2px);
             padding: .375rem .75rem;
-        }
+        }    
     </style>
     
 </head>

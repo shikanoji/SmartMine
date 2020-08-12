@@ -49,7 +49,7 @@
                                 <label for="noteselect">Ghi chú</label> 
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-12">
-                            <input class="form-control" type="text" name="note" required>
+                            <input class="form-control" type="text" name="note" maxlength="50" required>
                         </div>            
                 </div>
             </div>              

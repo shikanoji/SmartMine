@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\order;
+use App\Order;
 use App\Customer;
-use App\charge;
+use App\Payment;
 
 class HomeController extends Controller
 {
@@ -26,7 +26,16 @@ class HomeController extends Controller
      */
     public function index()
     {   
-         
-        return view('home');
+        $orderCount = Order::where('date', date('Y-m-d'))->get()->count();
+        $orderTotalValue = Order::where('date', date('Y-m-d'))->sum('charge');
+        $customerCount = Order::where('date', date('Y-m-d'))->distinct('customer_id')->count();
+        $dailyRevenue = Payment::where('date', date('Y-m-d'))->sum('amount');
+        $data = [
+            'orderCount' => $orderCount,
+            'orderTotalValue' => $orderTotalValue,
+            'customerCount' => $customerCount,
+            'dailyRevenue' => $dailyRevenue
+         ];
+        return view('home', compact('data'));
     }
 }

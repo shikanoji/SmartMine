@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Customer;
+use App\Product;
 class Order extends Model
 {
     //
@@ -11,6 +12,10 @@ class Order extends Model
 
     public function customer(){
         return $this->belongsTo(Customer::class);
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 
     public function scopeUserId($query, $request)
