@@ -14,7 +14,6 @@
                     <th scope="col">Khách hàng</th>
                     <th scope="col">Số tiền</th>
                     <th scope="col">Nhân viên phụ trách</th>
-                    <th scope="col">Ghi chú</th>
                     <th scope="col">Ngày</th>
                   </tr>
                 </thead>
@@ -24,15 +23,14 @@
                       <?php $count = $count + 1; $totalPayment = $totalPayment + $payment->amount ; ?>
                         <tr>
                           <td scope="row"><a href="/customer/details/{{$payment->customer->id}}">{{$payment->customer->name}}</a></td>
-                          <td scope="row">{{number_format($payment->amount,0,',','.')}}</td>
+                          <td scope="row"><a href="/payment/details/{{$payment->id}}">{{number_format($payment->amount,0,',','.')}}</a></td>
                           <td scope="row"> @if (App\User::where('id', $payment->user_id)->get()->count() > 0) {{App\User::findOrFail($payment->user_id)->name}} @endif</td>
-                          <td scope="row">{{$payment->note}}</td>
                           <td scope="row">{{ date('d-m-Y', strtotime($payment->date)) }}</td>   
                         </tr>
                     @endforeach
                   </tbody>
                 <tfoot>
-                    <tr>
+                    <tr style="display:@if (Auth::user()->hasSalerPermission()) block @else none @endif">
                       <td ><button type="button" class="btn btn-secondary" onclick="location.href='/payment/create'">Thêm</button></td>
                     </tr>
                 </tfoot>

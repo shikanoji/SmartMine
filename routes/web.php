@@ -54,12 +54,15 @@ Route::get('/order/index','OrderController@index');
 Route::post('/order/create','OrderController@store');
 Route::get('/order/details/{orderId}','OrderController@details');
 Route::post('/order/search','OrderController@search');
+Route::get('/order/remove/{id}', 'OrderController@destroy');
 
 //Payment
 Route::get('/payment/create/{customerId?}','PaymentController@create');
 Route::post('/payment/store','PaymentController@store');
 Route::get('payment/index','PaymentController@index');
 Route::post('/payment/search','PaymentController@search');
+Route::get('/payment/remove/{id}', 'PaymentController@destroy');
+Route::get('/payment/details/{paymentId}','PaymentController@details');
 
 //Product
 Route::get('/product/index', 'ProductController@index');

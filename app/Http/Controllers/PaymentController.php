@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use App\Payment;
 use App\User;
+use Auth;
 class PaymentController extends Controller
 {
     //
@@ -48,5 +49,24 @@ class PaymentController extends Controller
         $payment->note = request('note');
         $payment->save();
         return redirect("/payment/index");
+    }
+
+    public function destroy($id) {
+        if (Auth::user()->hasSalerPermission()) {
+            $payment = Payment::findOrFail($id);
+            if ($payment->user_id == Auth::user()->id) {
+                $payment->delete();
+            return redirect('/payment/index');
+            } else {
+                error('404');
+            }
+        } else {
+            error('404');
+        } 
+    }
+
+    public function details($id){
+        $payment = Payment::findOrFail($id);
+        return view("payment.details", compact("payment"));
     }
 }

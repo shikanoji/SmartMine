@@ -4,12 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Customer;
+use App\User;
 class Payment extends Model
 {
     public $timestamps = false;
     //
     public function customer(){
         return $this->belongsTo(Customer::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function scopeUserId($query, $request)

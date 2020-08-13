@@ -11,12 +11,11 @@
             <table class="table table-dt" id="ordersTable" style="text-align:center;">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">Khách hàng</th>
+                    <th scope="col">Khách</th>
                     <th scope="col">Loại</th>
-                    <th scope="col">Khối lượng</th>
-                    <th scope="col">Đơn vị</th>
+                    <th scope="col">KL</th>
                     <th scope="col">Thành tiền</th>
-                    <th scope="col">Người phụ trách</th>
+                    <th scope="col">Phụ trách</th>
                     <th scope="col">Ngày</th>
                   </tr>
                 </thead>
@@ -27,8 +26,7 @@
                         <tr>
                           <td scope="row"><a href="/customer/details/{{$order->customer->id}}">{{$order->customer->name}}</a></td>
                           <td scope="row">@if (App\Product::where('id', $order->product_id)->get()->count() > 0)  <a href="/product/details/{{$order->product_id}}">{{App\Product::findOrFail($order->product_id)->name}}</a> @endif</td>
-                          <td scope="row">{{$order->amount}}</td>
-                          <td scope="row">{{$order->unit}}</td>
+                          <td scope="row">{{$order->amount}} {{$order->unit}}</td>
                           <td scope="row"> <a href="/order/details/{{$order->id}}">{{number_format($order->charge, 0, ',', '.')}} </a></td>  
                           <td scope="row"> @if (App\User::where('id', $order->user_id)->get()->count() > 0) {{App\User::findOrFail($order->user_id)->name}} @endif</td>
                           <td scope="row">{{ date('d-m-Y', strtotime($order->date)) }}</td>   
@@ -36,7 +34,7 @@
                     @endforeach
                   </tbody>
                 <tfoot>
-                    <tr>
+                    <tr style="display:@if (Auth::user()->hasSalerPermission()) block @else none @endif">
                         <td><button type="button" class="btn btn-secondary" onclick="location.href='/order/create'">Thêm</button></td>
                     </tr>
                 </tfoot>

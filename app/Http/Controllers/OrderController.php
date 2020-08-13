@@ -7,6 +7,7 @@ use \App\Customer;
 use \App\Order;
 use \App\Payment;
 use \App\User;
+use Auth;
 class OrderController extends Controller
 {
     public function __construct()
@@ -39,6 +40,20 @@ class OrderController extends Controller
         $users = User::where('status','1')->get();
         $customers = Customer::where('status','1')->get();
         return view("order.index", compact("orders","customers","users"));
+    }
+
+    public function destroy($id) {
+        if (Auth::user()->hasSalerPermission()) {
+            $order = Order::findOrFail($id);
+            if ($order->user_id == Auth::user()->id) {
+                $order->delete();
+            return redirect('/order/index');
+            } else {
+                error('404');
+            }
+        } else {
+            error('404');
+        } 
     }
 
     public function store(){
