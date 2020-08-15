@@ -102,6 +102,14 @@
             </div>
         </div>
     </div>
+    <div class="row border-bottom" style="padding-bottom: 10px;">
+        <div class="col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+            <canvas id="value_chart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+            <canvas id="revenue_chart" width="400" height="400"></canvas>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -121,6 +129,72 @@
                         }
                         $this.text(num);
                     }
+                });
+                //Config revenue chart
+                var options = {
+                    scales: {
+                        yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function(value, index, values) {
+                            if(parseInt(value) >= 1000){
+                                return  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            } else {
+                                return  value;
+                            }
+                            }
+                        }
+                        }]
+                    }
+                }
+
+                var revenue_ctx = document.getElementById('revenue_chart');
+                var revenues = @json($data['revenuesByDate']);
+                var d = new Date();
+                var dateLabels = [];
+                for (i = 6; i > 0; i--) {
+                    var last = new Date(d.getTime() - (i * 24 * 60 * 60 * 1000));
+                    var day = last.getDate();
+                    dateLabels.push(day);
+                }
+                dateLabels.push(d.getDate());
+                var myChart = new Chart(revenue_ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dateLabels,
+                        datasets: [{
+                            label: 'Doanh thu 7 ngày gần nhất',
+                            data: revenues,
+                            fill: false,
+                            borderColor: "#ff735a",
+                            pointBackgroundColor: "#55bae7",
+                            pointBorderColor: "#55bae7",
+                            pointHoverBackgroundColor: "#55bae7",
+                            pointHoverBorderColor: "#55bae7",
+                        }]
+                    },
+                    options: options,
+                });
+
+                //Config order value chart
+                var value_ctx = document.getElementById('value_chart');
+                var values = @json($data['valuesByDate']);
+                var myChart = new Chart(value_ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dateLabels,
+                        datasets: [{
+                            label: 'Tổng giá trị đơn 7 ngày gần nhất',
+                            data: values,
+                            fill: false,
+                            borderColor: "#c4e681",
+                            pointBackgroundColor: "#55bae7",
+                            pointBorderColor: "#55bae7",
+                            pointHoverBackgroundColor: "#55bae7",
+                            pointHoverBorderColor: "#55bae7",
+                        }]
+                    },
+                    options: options,
                 });
             });
     </script>
