@@ -20,7 +20,7 @@
                 <th scope="col">Sđt</th>
                 <th scope="col">Địa chỉ</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col" style="width:10%">Sửa</th>
+                <th scope="col" style="width:10%;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}">Sửa</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                     <td style="width:10%">{{$customer->phone}}</td>
                     <td >{{$customer->address}}</td>
                     <td style="width:15%"> @if ($customer->status == "1") <span class="greentext">Đang hoạt động</span> @else <span class="redtext">Đã khoá</span> @endif</td>
-                    <td style="width:10%"> 
+                    <td style="width:10%; display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"> 
                       <a href="/customer/edit/{{$customer->id}}">
                           <span>
                             <i class="fa fa-edit" style="padding-right:10px;"></i>
@@ -49,7 +49,7 @@
               
             </tbody>
             <tfoot>
-              <tr>
+              <tr style="display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}">
                 <td colspan="4"><button type="button" class="btn btn-info" onclick="location.href='/customer/create'">Thêm</button></td>
               </tr>
             </tfoot>

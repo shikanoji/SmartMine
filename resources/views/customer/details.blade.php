@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
             </ol>
     </nav>
-    <div class="row" style="padding:15px;">
+    <div class="row" style="padding:15px; display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}">
         <div style="padding-right:10px;">
             <button class="btn btn-info" ><a style="color:white;" href="/payment/create/{{$customer->id}}">Thanh toán</a></button>
         </div>
@@ -27,7 +27,7 @@
     <div class="portlet-background row">
         <div class="col-md-6 portlet" style="padding-right:10px;">
             <div class="portlet-title gray-bg round-corner">
-                <label style="margin-left:0; margin-right:auto;margin-top:5px;">Thông tin cá nhân</label>&nbsp&nbsp<span><a href="/customer/edit/{{$customer->id}}"><i class="fa fa-edit"></i></a></span>
+                <label style="margin-left:0; margin-right:auto;margin-top:5px;">Thông tin cá nhân</label>&nbsp&nbsp<span style="display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a href="/customer/edit/{{$customer->id}}"><i class="fa fa-edit"></i></a></span>
             </div>         
             <div class="portlet-body">
                 <div class="row row-item">
@@ -36,18 +36,18 @@
                 </div>
                 <div class="row row-item justify-co">
                     <label class="col-lg-4 col-md-4 col-sm-4 col-4" style="text-align: center">Số đt:</label>
-                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><bold>{{$customer->phone}}</bold></label>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><b>{{$customer->phone}}</b></label>
                 </div>
                 <div class="row row-item justify-co">
                     <label class="col-lg-4 col-md-4 col-sm-4 col-4" style="text-align: center">Địa chỉ:</label>
-                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><bold>{{$customer->address}}</bold></label>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><b>{{$customer->address}}</b></label>
                 </div>
                 <div class="row row-item justify-co">
                     <label class="col-lg-4 col-md-4 col-sm-4 col-4" style="text-align: center">Tình trạng:</label>
                     @if ($customer->status == "1") 
-                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><bold>Đang hoạt động</bold></label>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 greentext" style="text-align: center"><b>Đang hoạt động</b></label>
                     @else
-                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 redtext" style="text-align: center"><bold>Đang khoá</bold></label>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-8 redtext" style="text-align: center"><b>Đang khoá</b></label>
                     @endif
                 </div>
             </div>      

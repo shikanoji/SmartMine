@@ -33,7 +33,7 @@ class PaymentController extends Controller
     }
 
     public function search(Request $request) {
-        $payments = Payment::query()->userId($request)->customerId($request)->date($request);
+        $payments = Payment::query()->userId($request)->customerId($request)->date($request)->get();
         $users = User::where('status','1')->get();
         $customers = Customer::where('status','1')->get();
         return view("payment.index", compact("payments","customers", "users"));

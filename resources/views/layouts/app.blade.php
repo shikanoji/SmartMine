@@ -86,7 +86,7 @@
             body, .table {
                 font-size: 3vw;
             }
-            input, .btn, .badge {
+            input {
                 font-size: 4vw;
             }
             h3 {
@@ -126,7 +126,14 @@
         .select2-container .select2-selection--single {
             height: calc(1.5em + .75rem + 2px);
             padding: .375rem .75rem;
-        }    
+        }
+        li, .badge, a {
+            font-size: 1.3vh;
+        }
+        h3 {
+            font-size: 3vh;
+        }
+
     </style>
     
 </head>
@@ -150,7 +157,7 @@
                             <a class="dropdown-item" href="/customer/list">
                                 Danh sách khách hàng
                             </a>
-                            <a class="dropdown-item" href="/customer/create">
+                            <a class="dropdown-item" href="/customer/create" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}">
                                 Thêm khách hàng mới
                             </a>
                             <a class="dropdown-item" href="/customer/accounts">
@@ -165,7 +172,7 @@
                             <a class="dropdown-item" href="/order/index">
                                 Lịch sử giao dịch
                             </a>
-                            <a class="dropdown-item" href="/order/create">
+                            <a class="dropdown-item" href="/order/create" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}">
                                 Giao dịch mới
                             </a>
                         </div>
@@ -177,8 +184,21 @@
                             <a class="dropdown-item" href="/payment/index">
                                 Lịch sử thanh toán
                             </a>
-                            <a class="dropdown-item" href="/payment/create">
+                            <a class="dropdown-item" href="/payment/create" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}">
                                 Thanh toán mới
+                            </a>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="cpdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chi phí</a>
+                        <div class="dropdown-menu" aria-labelledby="cpdropdown">
+                            <a class="dropdown-item" href="/expense/index">
+                                Danh sách chi phí
+                            </a>
+                            <a class="dropdown-item" href="/expense/create" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}">
+                                Thêm chi phí mới
                             </a>
                         </div>
 
@@ -189,6 +209,9 @@
                         <div class="dropdown-menu" aria-labelledby="product_dropdown">
                             <a class="dropdown-item" href="/product/index">
                                 Danh sách sản phẩm
+                            </a>
+                            <a class="dropdown-item" href="/product/create" style="display:{{Auth::user()->hasAdminPermission()? 'block' : 'none'}}">
+                                Thêm sản phẩm mới
                             </a>
                         </div>
 

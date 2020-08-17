@@ -64,7 +64,7 @@ class OrderController extends Controller
         $order->product_id = request('product_id');
         $order->date = date('Y-m-d');
         $order->unit = request('unit');
-        $order->amount = request('amount');
+        $order->amount = str_replace(',','',request('amount'));
         $order->charge = str_replace(',','',request('charge'));
         $order->save();
 

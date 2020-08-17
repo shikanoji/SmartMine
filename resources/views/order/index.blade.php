@@ -34,7 +34,7 @@
                     @endforeach
                   </tbody>
                 <tfoot>
-                    <tr style="display:@if (Auth::user()->hasSalerPermission()) block @else none @endif">
+                    <tr style="display:@if (Auth::user()->hasSalerPermission())  @else none @endif">
                         <td><button type="button" class="btn btn-secondary" onclick="location.href='/order/create'">Thêm</button></td>
                     </tr>
                 </tfoot>

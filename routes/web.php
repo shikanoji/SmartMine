@@ -64,6 +64,14 @@ Route::post('/payment/search','PaymentController@search');
 Route::get('/payment/remove/{id}', 'PaymentController@destroy');
 Route::get('/payment/details/{paymentId}','PaymentController@details');
 
+//Expense
+Route::get('/expense/create','ExpenseController@create');
+Route::post('/expense/store','ExpenseController@store');
+Route::get('expense/index','ExpenseController@index');
+Route::post('/expense/search','ExpenseController@search');
+Route::get('/expense/remove/{id}', 'ExpenseController@destroy');
+Route::get('/expense/details/{paymentId}','ExpenseController@details');
+
 //Product
 Route::get('/product/index', 'ProductController@index');
 Route::get('/product/create','ProductController@create');

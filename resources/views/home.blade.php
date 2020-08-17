@@ -35,15 +35,15 @@
                         </div>
                     </div>
                 </div>
-                <div onclick="location.href='/customer/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div onclick="location.href='/expense/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat bluetext ">
                         <div class="display">
                             <div class="number">
                                 <h3 class="">
-                                    <span class="count">{{$data['customerCount']}}</span>
+                                    <span class="count">{{$data['dailyExpense']}}</span>
                                 </h3>
-                                <i class="fa fa-group"></i>&nbsp 
-                                <small><b>Khách hàng</b></small>
+                                <i class="fa fa-balance-scale"></i>&nbsp 
+                                <small><b>Chi phí</b></small>
                             </div>
                         </div>
                     </div>
@@ -65,49 +65,75 @@
         </div>
     </div>
     <div class="row border-bottom" style="padding-bottom: 10px;">
-        <div class="col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="col-12 col-md-6 col-lg-6" style="margin-top:20px;">
             <div class="row" style="padding-bottom:10px;"> 
-                <span class="badge badge-success">Giao dịch mới nhất</span>
+                <div class="col-6" style="padding-left:0px;">
+                    <span class="badge badge-warning" >Giao dịch mới nhất</span>
+                </div>
+                <div class="col-6" style="text-align:right;padding-right:30px;">
+                    <a href="/order/index">Xem toàn bộ</a> 
+                </div> 
             </div>
             <div class="row" style="padding-bottom:10px;">
-                <?php $newestOrders = App\Order::orderBy('date', 'DESC')->take(10)->get() ?>
+                <?php $newestOrders = App\Order::orderBy('created_at','DESC')->take(10)->get() ?>
                 <ul style="width:95%" class="list-group">
                     @foreach ($newestOrders as $order)
-                    <li class="list-group-item">{{$order->amount}} {{$order->unit}} {{$order->product->name}} - {{$order->customer->name}} - {{number_format($order->charge, 0, ',', '.')}} VNĐ  </li>
+                    <li class="list-group-item bluetext">{{$order->amount}} {{$order->unit}} {{$order->product->name}} - {{$order->customer->name}} - {{number_format($order->charge, 0, ',', '.')}} VNĐ  </li>
                     @endforeach
-                    <li class="list-group-item">...</li>
+                    <li class="list-group-item"><button  type="button" class="btn btn-warning" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:black" href="/order/create">Thêm mới</a></button></li>
                 </ul>
             </div>  
-            <div class="row"> 
-                <button style="margin-right:20px;" type="button" class="btn btn-secondary"><a style="color:white" href="/order/index">Xem toàn bộ</a></button>
-                <button  type="button" class="btn btn-info" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/create">Thêm mới</a></button>
-            </div>
         </div>
-        <div class=" col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class=" col-12 col-md-6 col-lg-6" style="margin-top:20px;">
             <div class="row" style="padding-bottom:10px;"> 
-                <span class="badge badge-success">Thanh toán mới nhất</span>
+                <div class="col-6" style="padding-left:0px;">
+                    <span class="badge badge-success" >Thanh toán mới nhất</span>
+                </div>
+                <div class="col-6" style="text-align:right;padding-right:30px;">
+                    <a href="/order/index">Xem toàn bộ</a> 
+                </div> 
             </div>
             <div class="row" style="padding-bottom:10px;">
-                <?php $newestPayments = App\Payment::orderBy('date', 'DESC')->take(10)->get() ?>
+                <?php $newestPayments = App\Payment::orderBy('created_at', 'DESC')->take(10)->get() ?>
                 <ul style="width:95%" class="list-group">
                     @foreach ($newestPayments as $payment)
-                    <li class="list-group-item">{{number_format($payment->amount, 0, ',', '.')}} VNĐ - {{$payment->customer->name}} - {{$payment->note}}</li>
+                    <li class="list-group-item greentext">{{number_format($payment->amount, 0, ',', '.')}} VNĐ - {{$payment->customer->name}} - {{$payment->note}}</li>
                     @endforeach
-                    <li class="list-group-item">...</li>
+                    <li class="list-group-item"><button  type="button" class="btn btn-success" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/payment">Thêm mới</a></button></li>
                 </ul>
             </div>  
-            <div class="row"> 
-                <button style="margin-right:20px;" type="button" class="btn btn-secondary"><a style="color:white" href="/payment/index">Xem toàn bộ</a></button>
-                <button  type="button" class="btn btn-info" style="display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/payment">Thêm mới</a></button>
-            </div>
         </div>
     </div>
     <div class="row border-bottom" style="padding-bottom: 10px;">
-        <div class="col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="col-12 col-md-6 col-lg-6 mx-auto" style="margin-top:20px;">
+            <div class="row" style="padding-bottom:10px;"> 
+                <div class="col-6" style="padding-left:0px;">
+                    <span class="badge badge-danger" >Chi phí mới nhất</span>
+                </div>
+                <div class="col-6" style="text-align:right;padding-right:30px;">
+                    <a href="/expense/index">Xem toàn bộ</a> 
+                </div> 
+            </div>
+            <div class="row" style="padding-bottom:10px;">
+                <?php $newestExpenses = App\Expense::orderBy('created_at', 'DESC')->take(10)->get() ?>
+                <ul style="width:95%" class="list-group">
+                    @foreach ($newestExpenses as $expense)
+                    <li class="list-group-item redtext">{{$expense->user->name}} - {{$expense->content}} - {{number_format($expense->amount, 0, ',', '.')}} VNĐ  </li>
+                    @endforeach
+                    <li class="list-group-item"><button  type="button" class="btn btn-danger" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:white" href="/expense/create">Thêm mới</a></button></li>
+                </ul>
+            </div>  
+        </div>
+    </div>
+    <div class="row border-bottom" style="padding-bottom: 10px;">
+        <div class="col-12 col-md-4 col-lg-4" style="margin-top:20px;">
             <canvas id="value_chart" width="400" height="400"></canvas>
         </div>
-        <div class="col-12 col-md-12 col-lg-6" style="margin-top:20px;">
+        <div class="col-12 col-md-4 col-lg-4" style="margin-top:20px;">
             <canvas id="revenue_chart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4" style="margin-top:20px;">
+            <canvas id="expense_chart" width="400" height="400"></canvas>
         </div>
     </div>
 </div>
@@ -116,22 +142,18 @@
 @section('script')
      <script>
         $('.count').each(function () {
-                var $this = $(this);
-                jQuery({Counter: 0}).animate({Counter: $this.text()}, {
-                    duration: 1500,
-                    easing: 'swing',
-                    step: function() {
-                        var num = Math.ceil(this.Counter).toString();
-                        if(Number(num) > 999){
-                            while (/(\d+)(\d{3})/.test(num)) {
-                                num = num.replace(/(\d+)(\d{3})/, '$1' + '.' + '$2');
-                            }
-                        }
-                        $this.text(num);
-                    }
-                });
-                //Config revenue chart
-                var options = {
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 2000,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now).toLocaleString('en'));
+                }
+            });
+        });
+        //Config revenue chart
+        var options = {
                     scales: {
                         yAxes: [{
                         ticks: {
@@ -146,7 +168,7 @@
                         }
                         }]
                     }
-                }
+        }
 
                 var revenue_ctx = document.getElementById('revenue_chart');
                 var revenues = @json($data['revenuesByDate']);
@@ -163,10 +185,10 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Doanh thu 7 ngày gần nhất',
+                            label: 'Doanh thu ngày',
                             data: revenues,
                             fill: false,
-                            borderColor: "#ff735a",
+                            borderColor: "#c4e681",
                             pointBackgroundColor: "#55bae7",
                             pointBorderColor: "#55bae7",
                             pointHoverBackgroundColor: "#55bae7",
@@ -184,10 +206,10 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Tổng giá trị đơn 7 ngày gần nhất',
+                            label: 'Tổng giá trị đơn ngày',
                             data: values,
                             fill: false,
-                            borderColor: "#c4e681",
+                            borderColor: "#70ffe5",
                             pointBackgroundColor: "#55bae7",
                             pointBorderColor: "#55bae7",
                             pointHoverBackgroundColor: "#55bae7",
@@ -196,6 +218,26 @@
                     },
                     options: options,
                 });
-            });
+
+                //Config expense chart
+                var expense_ctx = document.getElementById('expense_chart');
+                var expenses = @json($data['expenseByDate']);
+                var myChart = new Chart(expense_ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dateLabels,
+                        datasets: [{
+                            label: 'Chi phí hàng ngày',
+                            data: expenses,
+                            fill: false,
+                            borderColor: "#ff735a",
+                            pointBackgroundColor: "#55bae7",
+                            pointBorderColor: "#55bae7",
+                            pointHoverBackgroundColor: "#55bae7",
+                            pointHoverBorderColor: "#55bae7",
+                        }]
+                    },
+                    options: options,
+                });
     </script>
 @endsection

@@ -18,7 +18,7 @@
                 <th scope="col" style="width:10%">STT</th>
                 <th scope="col">Tên</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col" style="width:10%">Sửa</th>
+                <th scope="col" style="width:10%;display:{{Auth::user()->hasAdminPermission()? '' : 'none'}}">Sửa</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                     @else
                       <td><span class="redtext">Đang khoá</span></td>
                       @endif
-                    <td style="width:10%"> 
+                    <td style="width:10%;display:{{Auth::user()->hasAdminPermission()? '' : 'none'}}"> 
                       <a href="/product/edit/{{$product->id}}">
                           <span>
                             <i class="fa fa-edit" style="padding-right:10px;"></i>
@@ -44,7 +44,7 @@
               
             </tbody>
             <tfoot>
-              <tr>
+              <tr style="display:@if (Auth::user()->hasAdminPermission())  @else none @endif">
                 <td colspan="4"><button type="button" class="btn btn-info" onclick="location.href='/product/create'">Thêm</button></td>
               </tr>
             </tfoot>
