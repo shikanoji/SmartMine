@@ -67,12 +67,9 @@
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-12 col-md-6 col-lg-6" style="margin-top:20px;">
             <div class="row" style="padding-bottom:10px;"> 
-                <div class="col-6" style="padding-left:0px;">
+                <div onclick="location.href='/order/index'" class="col-6" style="padding-left:0px;">
                     <span class="badge badge-warning" >Giao dịch mới nhất</span>
                 </div>
-                <div class="col-6" style="text-align:right;padding-right:30px;">
-                    <a href="/order/index">Xem toàn bộ</a> 
-                </div> 
             </div>
             <div class="row" style="padding-bottom:10px;">
                 <?php $newestOrders = App\Order::orderBy('created_at','DESC')->take(10)->get() ?>
@@ -80,18 +77,18 @@
                     @foreach ($newestOrders as $order)
                     <li class="list-group-item bluetext">{{$order->amount}} {{$order->unit}} {{$order->product->name}} - {{$order->customer->name}} - {{number_format($order->charge, 0, ',', '.')}} VNĐ  </li>
                     @endforeach
-                    <li class="list-group-item"><button  type="button" class="btn btn-warning" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:black" href="/order/create">Thêm mới</a></button></li>
+                    <li class="list-group-item"><a href="/order/index">...</a></li>
                 </ul>
-            </div>  
+            </div> 
+            <div class="row">
+                <button  type="button" class="btn btn-warning" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:black" href="/order/create">Thêm mới</a></button>
+            </div> 
         </div>
         <div class=" col-12 col-md-6 col-lg-6" style="margin-top:20px;">
             <div class="row" style="padding-bottom:10px;"> 
-                <div class="col-6" style="padding-left:0px;">
+                <div onclick="location.href='/payment/index'" class="col-6" style="padding-left:0px;">
                     <span class="badge badge-success" >Thanh toán mới nhất</span>
                 </div>
-                <div class="col-6" style="text-align:right;padding-right:30px;">
-                    <a href="/order/index">Xem toàn bộ</a> 
-                </div> 
             </div>
             <div class="row" style="padding-bottom:10px;">
                 <?php $newestPayments = App\Payment::orderBy('created_at', 'DESC')->take(10)->get() ?>
@@ -99,20 +96,20 @@
                     @foreach ($newestPayments as $payment)
                     <li class="list-group-item greentext">{{number_format($payment->amount, 0, ',', '.')}} VNĐ - {{$payment->customer->name}} - {{$payment->note}}</li>
                     @endforeach
-                    <li class="list-group-item"><button  type="button" class="btn btn-success" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/payment">Thêm mới</a></button></li>
+                    <li class="list-group-item"><a class="greentext" href="/order/index">...</a> </li>
                 </ul>
             </div>  
+            <div class="row">
+                <button  type="button" class="btn btn-success" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/payment">Thêm mới</a></button>
+            </div>
         </div>
     </div>
     <div class="row border-bottom" style="padding-bottom: 10px;">
         <div class="col-12 col-md-6 col-lg-6 mx-auto" style="margin-top:20px;">
-            <div class="row" style="padding-bottom:10px;"> 
+            <div onclick="location.href='/expense/index'" class="row" style="padding-bottom:10px;"> 
                 <div class="col-6" style="padding-left:0px;">
                     <span class="badge badge-danger" >Chi phí mới nhất</span>
                 </div>
-                <div class="col-6" style="text-align:right;padding-right:30px;">
-                    <a href="/expense/index">Xem toàn bộ</a> 
-                </div> 
             </div>
             <div class="row" style="padding-bottom:10px;">
                 <?php $newestExpenses = App\Expense::orderBy('created_at', 'DESC')->take(10)->get() ?>
@@ -120,10 +117,16 @@
                     @foreach ($newestExpenses as $expense)
                     <li class="list-group-item redtext">{{$expense->user->name}} - {{$expense->content}} - {{number_format($expense->amount, 0, ',', '.')}} VNĐ  </li>
                     @endforeach
-                    <li class="list-group-item"><button  type="button" class="btn btn-danger" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:white" href="/expense/create">Thêm mới</a></button></li>
+                    <li class="list-group-item"><a class="redtext" href="/expense/index">...</a></li>
                 </ul>
             </div>  
+            <div class="row">
+                <button  type="button" class="btn btn-danger" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}"><a style="color:white" href="/expense/create">Thêm mới</a></button>
+            </div>
         </div>
+    </div>
+    <div class="row" style="padding-top:5px;">
+        <span class="badge badge-pill badge-light"><b>Biểu đồ 7 ngày</b></span>
     </div>
     <div class="row border-bottom" style="padding-bottom: 10px;">
         <div class="col-12 col-md-4 col-lg-4" style="margin-top:20px;">
@@ -227,7 +230,7 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Chi phí hàng ngày (triệu)',
+                            label: 'Chi phí ngày (triệu)',
                             data: expenses,
                             fill: false,
                             borderColor: "#f36a5a",
