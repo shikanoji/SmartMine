@@ -86,11 +86,8 @@
             body, .table {
                 font-size: 3vw;
             }
-            input {
+            .input {
                 font-size: 4vw;
-            }
-            h3 {
-                font-size: 7vw;
             }
             .footer {
                 display: none;
@@ -127,7 +124,7 @@
             height: calc(1.5em + .75rem + 2px);
             padding: .375rem .75rem;
         }
-        li, .badge, a {
+        li, .badge, a, .table {
             font-size: 1.3vh;
         }
         h3 {

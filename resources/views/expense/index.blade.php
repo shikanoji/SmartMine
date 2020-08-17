@@ -11,7 +11,7 @@
             <table class="table table-dt" id="expensesTable" style="text-align:center;">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">Nội dung</th>
+                    <th style="width:40%" scope="col">Nội dung</th>
                     <th scope="col">Số tiền</th>
                     <th scope="col">Phụ trách</th>
                     <th scope="col">Ngày</th>
@@ -22,7 +22,7 @@
                     @foreach ($expenses as $expense)
                       <?php $count = $count + 1; $totalexpense = $totalexpense + $expense->amount ; ?>
                         <tr>
-                        <td scope="row"><a href="/expense/details/{{$expense->id}}">{{$expense->content}}</a></td>
+                          <td style="width:40%" scope="row"><a href="/expense/details/{{$expense->id}}">{{$expense->content}}</a></td>
                           <td scope="row">{{number_format($expense->amount,0,',','.')}}</td>
                           <td scope="row"> @if (App\User::where('id', $expense->user_id)->get()->count() > 0) {{App\User::findOrFail($expense->user_id)->name}} @endif</td>
                           <td scope="row">{{ date('d-m-Y', strtotime($expense->date)) }}</td>   
