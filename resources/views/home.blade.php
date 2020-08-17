@@ -10,7 +10,7 @@
             </div>
             <div class="row" style="background-color: aliceblue; border-radius:10px;">
                 <div onclick="location.href='/order/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat greentext">
+                    <div class="dashboard-stat purpletext">
                         <div class="display">
                             <div class="number">
                                 <h3 class="">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div onclick="location.href='/order/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat purpletext ">
+                    <div class="dashboard-stat bluetext">
                         <div class="display">
                             <div class="number">
                                 <h3 class="">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div onclick="location.href='/expense/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat bluetext ">
+                    <div class="dashboard-stat redtext ">
                         <div class="display">
                             <div class="number">
                                 <h3 class="">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div onclick="location.href='/payment/index'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat redtext">
+                    <div class="dashboard-stat greentext">
                         <div class="display">
                             <div class="number">
                                 <h3 class="">
@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="row border-bottom" style="padding-bottom: 10px;">
+    <div class="row" style="padding-bottom: 10px;">
         <div class="col-12 col-md-6 col-lg-6" style="margin-top:20px;">
             <div class="row" style="padding-bottom:10px;"> 
                 <div class="col-6" style="padding-left:0px;">
@@ -185,14 +185,14 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Doanh thu ngày',
+                            label: 'Doanh thu ngày (triệu)',
                             data: revenues,
                             fill: false,
-                            borderColor: "#c4e681",
-                            pointBackgroundColor: "#55bae7",
-                            pointBorderColor: "#55bae7",
-                            pointHoverBackgroundColor: "#55bae7",
-                            pointHoverBorderColor: "#55bae7",
+                            borderColor: "#2ab4c0",
+                            pointBackgroundColor: "#ffe24e",
+                            pointBorderColor: "#ffe24e",
+                            pointHoverBackgroundColor: "#ffe24e",
+                            pointHoverBorderColor: "#ffe24e",
                         }]
                     },
                     options: options,
@@ -206,14 +206,14 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Tổng giá trị đơn ngày',
+                            label: 'Tổng giá trị đơn ngày (triệu)',
                             data: values,
                             fill: false,
-                            borderColor: "#70ffe5",
-                            pointBackgroundColor: "#55bae7",
-                            pointBorderColor: "#55bae7",
-                            pointHoverBackgroundColor: "#55bae7",
-                            pointHoverBorderColor: "#55bae7",
+                            borderColor: "#5C9BD1",
+                            pointBackgroundColor: "#ffe24e",
+                            pointBorderColor: "#ffe24e",
+                            pointHoverBackgroundColor: "#ffe24e",
+                            pointHoverBorderColor: "#ffe24e",
                         }]
                     },
                     options: options,
@@ -227,14 +227,14 @@
                     data: {
                         labels: dateLabels,
                         datasets: [{
-                            label: 'Chi phí hàng ngày',
+                            label: 'Chi phí hàng ngày (triệu)',
                             data: expenses,
                             fill: false,
-                            borderColor: "#ff735a",
-                            pointBackgroundColor: "#55bae7",
-                            pointBorderColor: "#55bae7",
-                            pointHoverBackgroundColor: "#55bae7",
-                            pointHoverBorderColor: "#55bae7",
+                            borderColor: "#f36a5a",
+                            pointBackgroundColor: "#ffe24e",
+                            pointBorderColor: "#ffe24e",
+                            pointHoverBackgroundColor: "#ffe24e",
+                            pointHoverBorderColor: "#ffe24e",
                         }]
                     },
                     options: options,

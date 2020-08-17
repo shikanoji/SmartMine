@@ -131,7 +131,7 @@
             font-size: 1.3vh;
         }
         h3 {
-            font-size: 3vh;
+            font-size: 2.5vh;
         }
 
     </style>
