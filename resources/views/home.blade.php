@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom:10px;">
-                <?php $newestOrders = App\Order::orderBy('created_at','DESC')->take(10)->get() ?>
+                <?php $newestOrders = App\Order::orderBy('created_at','DESC')->take(7)->get() ?>
                 <ul style="width:95%" class="list-group">
                     @foreach ($newestOrders as $order)
                     <li class="list-group-item bluetext">{{$order->amount}} {{$order->unit}} {{$order->product->name}} - {{$order->customer->name}} - {{number_format($order->charge, 0, ',', '.')}} VNĐ  </li>
@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom:10px;">
-                <?php $newestPayments = App\Payment::orderBy('created_at', 'DESC')->take(10)->get() ?>
+                <?php $newestPayments = App\Payment::orderBy('created_at', 'DESC')->take(7)->get() ?>
                 <ul style="width:95%" class="list-group">
                     @foreach ($newestPayments as $payment)
                     <li class="list-group-item greentext">{{number_format($payment->amount, 0, ',', '.')}} VNĐ - {{$payment->customer->name}} - {{$payment->note}}</li>
@@ -100,7 +100,7 @@
                 </ul>
             </div>  
             <div class="row">
-                <button  type="button" class="btn btn-success" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/order/payment">Thêm mới</a></button>
+                <button  type="button" class="btn btn-success" style="padding:2px;display:{{Auth::user()->hasSalerPermission()? 'block' : 'none'}}"><a style="color:white" href="/payment/create">Thêm mới</a></button>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom:10px;">
-                <?php $newestExpenses = App\Expense::orderBy('created_at', 'DESC')->take(10)->get() ?>
+                <?php $newestExpenses = App\Expense::orderBy('created_at', 'DESC')->take(7)->get() ?>
                 <ul style="width:95%" class="list-group">
                     @foreach ($newestExpenses as $expense)
                     <li class="list-group-item redtext">{{$expense->user->name}} - {{$expense->content}} - {{number_format($expense->amount, 0, ',', '.')}} VNĐ  </li>
@@ -192,10 +192,10 @@
                             data: revenues,
                             fill: false,
                             borderColor: "#2ab4c0",
-                            pointBackgroundColor: "#ffe24e",
-                            pointBorderColor: "#ffe24e",
-                            pointHoverBackgroundColor: "#ffe24e",
-                            pointHoverBorderColor: "#ffe24e",
+                            pointBackgroundColor: "#6166ff",
+                            pointBorderColor: "#6166ff",
+                            pointHoverBackgroundColor: "#6166ff",
+                            pointHoverBorderColor: "#6166ff",
                         }]
                     },
                     options: options,
@@ -213,10 +213,10 @@
                             data: values,
                             fill: false,
                             borderColor: "#5C9BD1",
-                            pointBackgroundColor: "#ffe24e",
-                            pointBorderColor: "#ffe24e",
-                            pointHoverBackgroundColor: "#ffe24e",
-                            pointHoverBorderColor: "#ffe24e",
+                            pointBackgroundColor: "#6166ff",
+                            pointBorderColor: "#6166ff",
+                            pointHoverBackgroundColor: "#6166ff",
+                            pointHoverBorderColor: "#6166ff",
                         }]
                     },
                     options: options,
@@ -234,10 +234,10 @@
                             data: expenses,
                             fill: false,
                             borderColor: "#f36a5a",
-                            pointBackgroundColor: "#ffe24e",
-                            pointBorderColor: "#ffe24e",
-                            pointHoverBackgroundColor: "#ffe24e",
-                            pointHoverBorderColor: "#ffe24e",
+                            pointBackgroundColor: "#6166ff",
+                            pointBorderColor: "#6166ff",
+                            pointHoverBackgroundColor: "#6166ff",
+                            pointHoverBorderColor: "#6166ff",
                         }]
                     },
                     options: options,

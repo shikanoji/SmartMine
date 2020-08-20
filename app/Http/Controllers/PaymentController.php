@@ -16,7 +16,7 @@ class PaymentController extends Controller
     }
 
     public function index() {
-        $payments = Payment::all();
+        $payments = Payment::orderBy('created_at')->get();
         $users = User::where('status','1')->get();
         $customers = Customer::where('status','1')->get();
         return view("payment.index", compact('payments','customers','users'));

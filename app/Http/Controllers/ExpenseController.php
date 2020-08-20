@@ -15,7 +15,7 @@ class ExpenseController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-        $expenses = Expense::all();
+        $expenses = Expense::orderBy('created_at')->get();
         $users = User::where('status','1')->get();
         return view("expense.index", compact('expenses','users'));
     }

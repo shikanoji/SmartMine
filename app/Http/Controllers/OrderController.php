@@ -15,7 +15,7 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        $orders = order::all();
+        $orders = order::orderBy('created_at')->get();
         $users = User::where('status','1')->get();
         $customers = Customer::where('status','1')->get();
         return view("order.index", compact("orders","customers","users"));

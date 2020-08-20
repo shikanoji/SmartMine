@@ -7,7 +7,6 @@ use App\Customer;
 use App\User;
 class Payment extends Model
 {
-    public $timestamps = false;
     protected $fillable = ['date','customer_id','user_id'];
     //
     public function customer(){
