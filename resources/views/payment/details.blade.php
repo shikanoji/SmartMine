@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center" style="width:100%;padding:20px; display:{{Auth::user()->hasSalerPermission()? '' : 'none'}}">
+    <div class="row justify-content-center" style="width:100%;padding:20px; display:{{Auth::user()->hasAdminPermission()? '' : 'none'}}">
         <div>
             <button class="btn btn-danger"><a style="color:white;" href="/payment/remove/{{$payment->id}}">Huỷ thanh toán</a></button>    
         </div> 

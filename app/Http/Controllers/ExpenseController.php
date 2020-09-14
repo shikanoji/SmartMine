@@ -42,7 +42,7 @@ class ExpenseController extends Controller
     }
 
     public function destroy($id) {
-        if (Auth::user()->hasSalerPermission()) {
+        if (Auth::user()->hasAdminPermission()) {
             $expense = expense::findOrFail($id);
             if ($expense->user_id == Auth::user()->id) {
                 $expense->delete();

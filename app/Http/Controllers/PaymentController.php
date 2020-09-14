@@ -52,7 +52,7 @@ class PaymentController extends Controller
     }
 
     public function destroy($id) {
-        if (Auth::user()->hasSalerPermission()) {
+        if (Auth::user()->hasAdminPermission()) {
             $payment = Payment::findOrFail($id);
             if ($payment->user_id == Auth::user()->id) {
                 $payment->delete();

@@ -43,7 +43,7 @@ class OrderController extends Controller
     }
 
     public function destroy($id) {
-        if (Auth::user()->hasSalerPermission()) {
+        if (Auth::user()->hasAdminPermission()) {
             $order = Order::findOrFail($id);
             if ($order->user_id == Auth::user()->id) {
                 $order->delete();
